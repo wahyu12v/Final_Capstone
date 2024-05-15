@@ -1,0 +1,6 @@
+frontend/node_m*
+backend/node_m*
+frontend/.env
+backend/.env
+dist
+build

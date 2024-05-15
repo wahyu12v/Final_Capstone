@@ -1,0 +1,26 @@
+{
+  "name": "backend_pantas",
+  "version": "1.0.0",
+  "description": "\"backend for app PANTAS(Pelaporan Aduan Tumpukan Sampah)\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wahyu12v/Final_Capstone.git"
+  },
+  "keywords": [
+    "backend"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wahyu12v/Final_Capstone/issues"
+  },
+  "homepage": "https://github.com/wahyu12v/Final_Capstone#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "prisma": "^5.14.0"
+  }
+}
