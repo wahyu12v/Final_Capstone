@@ -1,0 +1,19 @@
+### Login Admin
+POST http://localhost:3000/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username" : "putrodwi31",
+  "password" : "putro123"
+}
+
+### Get Admin
+GET http://localhost:3000/users/
+Accept: application/json
+Authorization: 38d75e73-0b53-43ea-8dea-b278961d9516
+
+### Logout Admin
+DELETE http://localhost:3000/users/
+Accept: application/json
+Authorization: 38d75e73-0b53-43ea-8dea-b278961d9516

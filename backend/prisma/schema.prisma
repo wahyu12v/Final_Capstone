@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  username String  @id @db.VarChar(100)
+  password String  @db.VarChar(100)
+  name     String  @db.VarChar(100)
+  token    String? @db.VarChar(100)
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime?
+
+  @@map("users")
+}
+
+model Pelapor {
+  pelapoId  Int @id @default(autoincrement())
+  namaPelapor String @db.VarChar(200)
+  emailPelapor  String @db.VarChar(100)
+  nomorPelapor String @db.VarChar(100)
+  dateCreated DateTime @default(now())
+
+  laporans Laporan[]
+
+  @@map("pelapors")
+}
+
+model Laporan {
+  laporanId Int @id @default(autoincrement())
+  pelaporId Int
+  gambarLaporan String @db.VarChar(200)
+  deskripsiLaporan String @db.Text
+  lokasiLaporan String @db.VarChar(200)
+
+  pelapor Pelapor @relation(fields: [pelaporId], references: [pelapoId])
+
+  @@map("laporans")
+}
