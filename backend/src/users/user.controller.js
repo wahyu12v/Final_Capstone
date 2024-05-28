@@ -1,10 +1,10 @@
 import express from "express"
 import { getUserByUsername, editUserByUsername } from "./user.service.js"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 import { v4 as uuid } from "uuid"
 import { requireLogin, validateData } from "../middleware/middleware.js";
 import { userLoginSchema } from "./user.validation.js";
-
 const user_router = express.Router();
 
 user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
@@ -38,12 +38,15 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
 
         const user = await editUserByUsername(userLogin.username, { token: uuid() });
 
+
+        const token = jwt.sign({ token: user.token }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+
         return res.status(200).json({
             status: 200,
             message: "Login success",
             data: {
                 username: user.username,
-                token: user.token,
+                token: token,
                 name: user.name
             }
         });

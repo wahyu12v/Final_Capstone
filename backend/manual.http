@@ -11,9 +11,46 @@ Accept: application/json
 ### Get Admin
 GET http://localhost:3000/users/
 Accept: application/json
-Authorization: 38d75e73-0b53-43ea-8dea-b278961d9516
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
 
 ### Logout Admin
 DELETE http://localhost:3000/users/
 Accept: application/json
-Authorization: 38d75e73-0b53-43ea-8dea-b278961d9516
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+
+
+### Get Laporan
+GET http://localhost:3000/laporans/
+Accept: application/json
+Content-Type: application/json
+
+### Add Laporan
+POST http://localhost:3000/laporans/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "namaPelapor": "Putro Dwi",
+  "emailPelapor": "putrodwi31@gmail.com",
+  "nomorPelapor": "083805200284",
+  "deskripsiLaporan": "Banyak sekali sampah",
+  "lokasiLaporan": "102123213.2100021, 1200012.1200321", //Longitude, Latitude
+  "image": "file.png"
+}
+
+### Remove Laporan
+DELETE http://localhost:3000/laporans/8
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+
+### Update Laporan
+PATCH http://localhost:3000/laporans/7
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+
+{
+  "status": 1,
+  "showOnPage": 1
+}

@@ -25,7 +25,7 @@ model User {
 }
 
 model Pelapor {
-  pelapoId  Int @id @default(autoincrement())
+  pelaporId  Int @id @default(autoincrement())
   namaPelapor String @db.VarChar(200)
   emailPelapor  String @db.VarChar(100)
   nomorPelapor String @db.VarChar(100)
@@ -42,8 +42,11 @@ model Laporan {
   gambarLaporan String @db.VarChar(200)
   deskripsiLaporan String @db.Text
   lokasiLaporan String @db.VarChar(200)
+  dateCreated DateTime @default(now())
+  status Int @default(0)
+  showOnPage Int @default(0)
 
-  pelapor Pelapor @relation(fields: [pelaporId], references: [pelapoId])
+  pelapor Pelapor @relation(fields: [pelaporId], references: [pelaporId])
 
   @@map("laporans")
 }
