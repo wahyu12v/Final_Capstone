@@ -39,7 +39,7 @@
 
     <header class="section__container header__container" id="home">
       <div class="header__image">
-        <img src="assets/sampah.jpg" alt="header" />
+        <img src="assets/header.jpg" alt="header" />
       </div>
       <div class="header__content">
         <h1>Halaman Laporkan Sampah di Sistem <span>PANTAS</span></h1>
@@ -105,67 +105,64 @@
     </section>
   
 
-
     <section class="section__container client__container" id="form" style="margin-top: 30px;">
       <h2 class="section__header">Ayo Laporkan Tumpukan Sampah di sekitar Anda</h2>
       <p class="section__description">
-       Silahkan isi form laporan berikut ini dengan tepat dan apa Adanya.Kontribusi anda sangat berarti bagi kita semua demi menciptakan lingkungan yang bersih bebas sampah.
+          Silahkan isi form laporan berikut ini dengan tepat dan apa Adanya.Kontribusi anda sangat berarti bagi kita semua demi menciptakan lingkungan yang bersih bebas sampah.
       </p>
-
-      <div class="container_form">
-        <div class="form">
-          <form action="#" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="form-name">Nama:</label>
-                <input type="text" class="form-control" id="form-name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="form-email">Email:</label>
-                <input type="email" class="form-control" id="form-email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="form-wa">WhatsApp:</label>
-                <input type="text" class="form-control" id="form-wa" name="wa" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="form-kategori">Kategori Tumpukan:</label>
-                <select class="form-control" id="form-kategori" name="kategori" required>
-                    <option value="" hidden>Pilih kategori</option>
-                    <option value="parah">Parah</option>
-                    <option value="sedang">Sedang</option>
-                    <option value="kecil">Kecil</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="form-deskripsi">Deskripsi:</label>
-                <textarea class="form-control" id="form-deskripsi" name="deskripsi" rows="4" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="form-foto">Foto:</label>
-                <input type="file" class="form-control-file" id="form-foto" name="foto" accept="image/*" required>
-            </div>
-            
-            <div class="header__btn">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
-        </div>
-        <div class="map-container">
-          <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.8442247219484!2d-122.08424968469379!3d37.422065879825864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb24a5c0e0c35%3A0x3030bfbca0ec4ed3!2sGoogleplex!5e0!3m2!1sen!2sus!4v1588899921473!5m2!1sen!2sus"
-              width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
-          </iframe>
-      </div>
-    </div>
   
+      <div class="container_form">
+          <div class="map-container">
+              <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.8442247219484!2d-122.08424968469379!3d37.422065879825864!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb24a5c0e0c35%3A0x3030bfbca0ec4ed3!2sGoogleplex!5e0!3m2!1sen!2sus!4v1588899921473!5m2!1sen!2sus"
+                  width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+              </iframe>
+          </div>
+          <div class="form">
+              <form action="#" method="POST" enctype="multipart/form-data">
+                  <div class="form-group">
+                      <label for="form-name">Nama:</label>
+                      <input type="text" class="form-control" id="form-name" name="name" required>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="form-email">Email:</label>
+                      <input type="email" class="form-control" id="form-email" name="email" required>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="form-wa">WhatsApp:</label>
+                      <input type="text" class="form-control" id="form-wa" name="wa" required>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="form-kategori">Kategori Tumpukan:</label>
+                      <select class="form-control" id="form-kategori" name="kategori" required>
+                          <option value="" hidden>Pilih kategori</option>
+                          <option value="parah">Parah</option>
+                          <option value="sedang">Sedang</option>
+                          <option value="kecil">Kecil</option>
+                      </select>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="form-deskripsi">Deskripsi:</label>
+                      <textarea class="form-control" id="form-deskripsi" name="deskripsi" rows="4" required></textarea>
+                  </div>
+  
+                  <div class="form-group">
+                      <label for="form-foto">Foto:</label>
+                      <input type="file" class="form-control-file" id="form-foto" name="foto" accept="image/*" required>
+                  </div>
+  
+                  <div class="header__btn">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </form>
+          </div>
+      </div>
   </section>
-
-
+  
 
 
 
