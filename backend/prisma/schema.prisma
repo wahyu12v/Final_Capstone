@@ -41,7 +41,9 @@ model Laporan {
   pelaporId Int
   gambarLaporan String @db.VarChar(200)
   deskripsiLaporan String @db.Text
-  lokasiLaporan String @db.VarChar(200)
+  lokasiLaporanLat String @db.VarChar(100)
+  lokasiLaporanLng String @db.VarChar(100)
+  kategoriSampah Int @default(0)
   dateCreated DateTime @default(now())
   status Int @default(0)
   showOnPage Int @default(0)

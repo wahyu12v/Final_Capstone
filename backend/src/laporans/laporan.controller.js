@@ -26,7 +26,7 @@ laporan_router.get("/", async (req, res) => {
 
 laporan_router.post("/", fileUpload(), validateData(laporanSchema), validateImageUpload, async (req, res) => {
     try {
-        const { emailPelapor, namaPelapor, nomorPelapor, deskripsiLaporan, lokasiLaporan, url } = req.body;
+        const { emailPelapor, namaPelapor, nomorPelapor, kategoriSampah, deskripsiLaporan, lokasiLaporanLat, lokasiLaporanLng, url } = req.body;
         const gambarLaporan = url
         const checkPelapor = await prisma.pelapor.findFirst({
             where: {
@@ -51,7 +51,9 @@ laporan_router.post("/", fileUpload(), validateData(laporanSchema), validateImag
             pelaporId,
             gambarLaporan,
             deskripsiLaporan,
-            lokasiLaporan,
+            lokasiLaporanLat,
+            lokasiLaporanLng,
+            kategoriSampah: parseInt(kategoriSampah)
         });
 
         const pelaporLaporan = await prisma.pelapor.findUnique({
