@@ -1,66 +1,36 @@
-import { useState, useEffect } from "react";
-
-const useGeoLocation = () => {
-    const [location, setLocation] = useState({
-        loaded: false,
-        coordinates: { lat: "", lng: "" },
-    });
-
-    const onSuccess = (location) => {
-        setLocation({
-            loaded: true,
-            coordinates: {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-            },
-        });
-    };
-
-    const onError = (error) => {
-        setLocation({
-            loaded: true,
-            error: {
-                code: error.code,
-                message: error.message,
-            },
-        });
-    };
-
-    useEffect(() => {
+const getGeoLocation = () => {
+    return new Promise((resolve, reject) => {
         if (!("geolocation" in navigator)) {
-            onError({
+            reject({
                 code: 0,
                 message: "Geolocation not supported",
             });
             return;
         }
 
-        let didCancel = false;
-
-        const getLocation = () => {
+        setTimeout(() => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    if (!didCancel) {
-                        onSuccess(position);
-                    }
+                    resolve({
+                        loaded: true,
+                        coordinates: {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        },
+                    });
                 },
                 (error) => {
-                    if (!didCancel) {
-                        onError(error);
-                    }
+                    reject({
+                        loaded: true,
+                        error: {
+                            code: error.code,
+                            message: error.message,
+                        },
+                    });
                 }
             );
-        };
-
-        getLocation();
-
-        // Cleanup function
-        return () => {
-            didCancel = true;
-        };
-    }, []);
-
-    return location;
+        }, 3000);
+    });
 };
 
-export default useGeoLocation;
+export default getGeoLocation;

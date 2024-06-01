@@ -8,53 +8,55 @@ import {
   useMap,
   Circle,
 } from 'react-leaflet';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 import Footer from '../../components/Footer/Footer';
 import FormLaporan from '../../components/Form/FormLaporan';
 import Navbar from '../../components/Navbar/Navbar';
-import useGeoLocation from '../../hooks/useLocation';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import 'leaflet/dist/leaflet.css';
+import getGeoLocation from '../../hooks/useLocation';
 
 const queryClient = new QueryClient();
 
 const Laporan = () => {
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-
-  const Lokasi = useGeoLocation();
-
-  const promise = () =>
-    new Promise((resolve) => setTimeout(() => resolve({ lat, lng }), 4000));
+  const hasRun = useRef(false);
+  const [location, setLocation] = useState(null);
 
   useEffect(() => {
-    if (lat !== 0 && lng !== 0) {
-      toast.promise(promise, {
-        loading: 'Mendapatkan lokasi...',
-        success: (data) => {
-          return `Lokasi berhasil didapatkan`;
-        },
-        error: 'Error',
-      });
+    if (!hasRun.current) {
+      const getLocation = async () => {
+        const loadingToast = toast.loading(
+          'Mendapatkan lokasi Anda saat ini...'
+        );
+        try {
+          const locationData = await getGeoLocation();
+          setLocation(locationData);
+          toast.success('Lokasi Anda di dapatkan!', {
+            id: loadingToast,
+          });
+        } catch (error) {
+          toast.error(
+            'Gagal mendapatkan lokasi Anda, akses lokasi tidak diizinkan',
+            {
+              id: loadingToast,
+            }
+          );
+        }
+      };
+      hasRun.current = true;
+      getLocation();
     }
-  }, [lat]);
-
-  useEffect(() => {
-    if (Lokasi.loaded && !Lokasi.error) {
-      setLat(Lokasi.coordinates.lat);
-      setLng(Lokasi.coordinates.lng);
-    }
-  }, [Lokasi]);
+  }, []);
   const LocationMaker = () => {
     const peta = useMap();
 
     useEffect(() => {
-      if (Lokasi.loaded && !Lokasi.error) {
-        peta.flyTo(Lokasi.coordinates, peta.getZoom());
+      if (location && location.loaded && !location.error) {
+        peta.flyTo(location.coordinates, peta.getZoom());
       }
-    }, []);
+    }, [location]);
     return <></>;
   };
   const page = [
@@ -212,15 +214,18 @@ const Laporan = () => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <LocationMaker />
-                {Lokasi.loaded && !Lokasi.error && (
+                {location && location.loaded && !location.error && (
                   <Marker
-                    position={[Lokasi.coordinates.lat, Lokasi.coordinates.lng]}
+                    position={[
+                      location.coordinates.lat,
+                      location.coordinates.lng,
+                    ]}
                   >
                     <Popup>Posisi anda saat ini</Popup>
                     <Circle
                       center={{
-                        lat: Lokasi.coordinates.lat,
-                        lng: Lokasi.coordinates.lng,
+                        lat: location.coordinates.lat,
+                        lng: location.coordinates.lng,
                       }}
                       pathOptions={{ color: 'none', fillColor: 'red' }}
                       radius={200}
@@ -233,7 +238,10 @@ const Laporan = () => {
           <div className="col-lg">
             <Card>
               <Card.Body>
-                <FormLaporan lat={lat} lng={lng} />
+                <FormLaporan
+                  lat={location && location.loaded && location.coordinates.lat}
+                  lng={location && location.loaded && location.coordinates.lng}
+                />
               </Card.Body>
             </Card>
           </div>
