@@ -4,6 +4,7 @@ import { laporanSchema } from '../../validations/laporan.validations';
 import { createLaporan } from '../../actions/laporan.action';
 import { Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';
+import { RiPlaneFill, RiSendPlane2Fill, RiSendPlaneFill } from 'react-icons/ri';
 
 export default function FormLaporan({ lat, lng }) {
   const formik = useFormik({
@@ -153,19 +154,24 @@ export default function FormLaporan({ lat, lng }) {
       </Form.Group>
       <div className="header__btn">
         {formLaporanIsPending ? (
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ pointerEvents: 'none' }}
+            disabled
+          >
             <Spinner
               as="span"
               animation="grow"
               size="sm"
               role="status"
               aria-hidden="true"
-            />
+            />{' '}
             Mengirim...
           </button>
         ) : (
           <button type="submit" className="btn btn-primary">
-            Submit
+            <RiSendPlaneFill /> Kirim laporan
           </button>
         )}
       </div>
