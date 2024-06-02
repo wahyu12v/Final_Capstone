@@ -17,6 +17,7 @@ model User {
   username String  @id @db.VarChar(100)
   password String  @db.VarChar(100)
   name     String  @db.VarChar(100)
+  email    String? @db.VarChar(100)
   token    String? @db.VarChar(100)
   dateCreated DateTime @default(now())
   dateUpdated DateTime?
@@ -51,4 +52,16 @@ model Laporan {
   pelapor Pelapor @relation(fields: [pelaporId], references: [pelaporId])
 
   @@map("laporans")
+}
+
+model Mail {
+  mailId Int @id @default(autoincrement())
+  mailTo String @db.VarChar(200)
+  mailType Int
+  laporanId Int?
+  dateCreated DateTime @default(now())
+  dateSended DateTime?
+  mailStatus Int @default(0)
+
+  @@map("mails")
 }

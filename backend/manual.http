@@ -11,12 +11,12 @@ Accept: application/json
 ### Get Admin
 GET http://localhost:3000/users/
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+Authorization: Bearer TOKEN
 
 ### Logout Admin
 DELETE http://localhost:3000/users/
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+Authorization: Bearer TOKEN
 
 
 ### Get Laporan
@@ -42,15 +42,19 @@ Accept: application/json
 DELETE http://localhost:3000/laporans/8
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+Authorization: Bearer TOKEN
 
 ### Update Laporan
 PATCH http://localhost:3000/laporans/7
 Content-Type: application/json
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjE1MjU0MTNjLTQwZTktNDA2MS1hMGU2LTVmZmU1NzA1ZjdiNyIsImlhdCI6MTcxNjg2NTEwMywiZXhwIjoxNzE3NDY5OTAzfQ.fQTVBo8D9_u3RG3dtu3FED1J1QAp-sDGHnQcwrwj-VQ
+Authorization: Bearer TOKEN
 
 {
   "status": 1,
   "showOnPage": 1
 }
+
+### MAIL TYPE
+### 0 = SEND NOTIF TO ADMIN WHEN NEW LAPORAN
+### 1 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS SENDED

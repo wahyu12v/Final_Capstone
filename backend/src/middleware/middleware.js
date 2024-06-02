@@ -2,7 +2,6 @@ import { getUserByToken } from "../users/user.service.js";
 import { ZodError } from "zod";
 import path from "path";
 import jwt from "jsonwebtoken";
-import fs from "fs";
 
 export const requireLogin = async (req, res, next) => {
     if (!req.headers.authorization) {
@@ -46,7 +45,7 @@ export const validateImageUpload = (req, res, next) => {
     const image = req.files.image;
     const fileSize = image.data.length;
     const ext = path.extname(image.name);
-    const filename = image.md5 + ext;
+    const filename = Date.now() + image.md5 + ext;
     const url = `laporans/images/${filename}`;
     const allowedType = [".png", ".jpg", ".jpeg"];
     if (!allowedType.includes(ext.toLocaleLowerCase())) {

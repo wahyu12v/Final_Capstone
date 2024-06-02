@@ -1,7 +1,11 @@
 import prisma from "../config/db.config.js";
 
 export const findLaporans = async () => {
-    const laporans = await prisma.laporan.findMany();
+    const laporans = await prisma.laporan.findMany({
+        include: {
+            pelapor: true
+        }
+    });
     return laporans;
 }
 

@@ -5,6 +5,7 @@ import { __dirname } from "./config/utils.config.js";
 import main_router from "./main/main.controller.js";
 import user_router from "./users/user.controller.js";
 import laporan_router from "./laporans/laporan.controller.js";
+import cronJobScheduler from "./helpers/cron.helper.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,8 @@ app.use("/", main_router);
 app.use("/users", user_router);
 app.use('/laporans', laporan_router);
 app.use('/laporans/images', express.static('public/images'));
+
+cronJobScheduler();
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
