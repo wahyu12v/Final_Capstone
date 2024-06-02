@@ -238,10 +238,14 @@ const Laporan = () => {
           <div className="col-lg">
             <Card>
               <Card.Body>
-                <FormLaporan
-                  lat={location && location.loaded && location.coordinates.lat}
-                  lng={location && location.loaded && location.coordinates.lng}
-                />
+                {location && location.loaded && !location.error ? (
+                  <FormLaporan
+                    lat={location.coordinates.lat}
+                    lng={location.coordinates.lng}
+                  />
+                ) : (
+                  <FormLaporan lat={0} lng={0} />
+                )}
               </Card.Body>
             </Card>
           </div>

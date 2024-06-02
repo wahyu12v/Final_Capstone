@@ -4,7 +4,8 @@ import { laporanSchema } from '../../validations/laporan.validations';
 import { createLaporan } from '../../actions/laporan.action';
 import { Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';
-import { RiPlaneFill, RiSendPlane2Fill, RiSendPlaneFill } from 'react-icons/ri';
+import { RiSendPlaneFill } from 'react-icons/ri';
+import { useEffect } from 'react';
 
 export default function FormLaporan({ lat, lng }) {
   const formik = useFormik({
@@ -23,6 +24,10 @@ export default function FormLaporan({ lat, lng }) {
       submitFormLaporan(values);
     },
   });
+  useEffect(() => {
+    formik.setFieldValue('lat', lat);
+    formik.setFieldValue('lng', lng);
+  }, [lat, lng]);
 
   const { mutate: submitFormLaporan, isPending: formLaporanIsPending } =
     createLaporan({
@@ -65,8 +70,18 @@ export default function FormLaporan({ lat, lng }) {
         <Form.Control.Feedback type="invalid">
           {formik.errors.name}
         </Form.Control.Feedback>
-        <Form.Control type="text" name="lat" defaultValue={lat} hidden />
-        <Form.Control type="text" name="lng" defaultValue={lng} hidden />
+        <Form.Control
+          type="text"
+          name="lat"
+          defaultValue={formik.values.lat}
+          hidden
+        />
+        <Form.Control
+          type="text"
+          name="lng"
+          defaultValue={formik.values.lng}
+          hidden
+        />
       </Form.Group>
       <Form.Group className="my-3">
         <Form.Label htmlFor="form-email">Email:</Form.Label>

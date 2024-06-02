@@ -1,4 +1,3 @@
-import { RiArrowUpFill } from 'react-icons/ri';
 import ScrollToTop from 'react-scroll-to-top';
 export default function Footer() {
   return (
