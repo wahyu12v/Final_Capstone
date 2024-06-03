@@ -1,11 +1,11 @@
 import Form from 'react-bootstrap/Form';
 import { useFormik } from 'formik';
-import { laporanSchema } from '../../validations/laporan.validations';
-import { createLaporan } from '../../actions/laporan.action';
 import { Spinner } from 'react-bootstrap';
 import { toast } from 'sonner';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { useEffect } from 'react';
+import { laporanSchema } from '../../validations/laporan.validations';
+import { createLaporan } from '../../actions/laporan.action';
 
 export default function FormLaporan({ lat, lng }) {
   const formik = useFormik({
@@ -34,15 +34,13 @@ export default function FormLaporan({ lat, lng }) {
       onSuccess: (data) => {
         if (data.status === 200) {
           toast.success('Laporan berhasil dikirim');
-          formik.setFieldValue('name', '');
-          formik.setFieldValue('email', '');
-          formik.setFieldValue('wa', '');
-          formik.setFieldValue('kategori', '');
-          formik.setFieldValue('deskripsi', '');
-          formik.setFieldValue('foto', '');
+          formik.resetForm();
         } else {
           toast.error('Laporan gagal dikirim');
         }
+      },
+      onError: () => {
+        toast.error('Laporan gagal dikirim');
       },
     });
 

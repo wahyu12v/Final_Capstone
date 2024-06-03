@@ -1,4 +1,20 @@
 import * as Yup from 'yup';
+import { debounceCheckWaNumber } from '../actions/laporan.action.js';
+
+Yup.addMethod(Yup.string, 'wa', function (message) {
+    return this.test('whatsapp-number', message, async function (value) {
+        const { path, createError } = this;
+
+        if (!value) return true; // Skip empty values
+
+        const isRegistered = await debounceCheckWaNumber(value);
+        if (isRegistered.status === true) {
+            return isRegistered
+        } else {
+            createError({ path, message });
+        }
+    });
+});
 
 export const laporanSchema = Yup.object().shape({
     name: Yup.string()
@@ -10,6 +26,7 @@ export const laporanSchema = Yup.object().shape({
         .min(10, "Nomor Whatsapp minimal 10 karakter")
         .max(13, "Nomor Whatsapp maksimal 13 karakter")
         .matches(/^[0-9]+$/, "Hanya angka yang diperbolehkan")
+        .wa("Nomor yang anda masukkan tidak terdaftar di whatsapp")
         .required("Nomor Whatsapp harus diisi"),
     kategori: Yup.string().required("Kategori harus diisi"),
     deskripsi: Yup.string().min(6, "Deskripsi minimal 6 karakter").max(300, "Deskripsi maksimal 300 karakter").required("Deskripsi harus diisi"),
