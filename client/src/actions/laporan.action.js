@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"
+import { debouncePromise, memoizeWithInvalidation } from "../utils/memo.utils";
 
-export const createLaporan = ({ onSuccess }) => {
+export const createLaporan = ({ onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["createLaporan"],
         mutationFn: async (body) => {
@@ -22,5 +23,32 @@ export const createLaporan = ({ onSuccess }) => {
             return res.data;
         },
         onSuccess,
+        onError
     })
 }
+
+export const debounceCheckWaNumber = debouncePromise(async (number) => {
+    try {
+        const res = await axios.post(`http://localhost:3000/check-number`, { number: number }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        return res.data
+    } catch (error) {
+        return false
+    }
+}, 500)
+
+export const memoizedCheckWaNumber = memoizeWithInvalidation(async (number) => {
+    try {
+        const res = await axios.post(`http://localhost:3000/check-number`, { number: number }, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        return res.data
+    } catch (error) {
+        return false
+    }
+}, 3000)

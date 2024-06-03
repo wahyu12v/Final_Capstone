@@ -1,8 +1,10 @@
+import imgHero from '/src/assets/hero.jpg';
+
 export default function Hero() {
   return (
     <header className="section__container header__container" id="home">
       <div className="header__image">
-        <img src="/src/assets/hero.jpg" alt="header" data-aos="fade-left" />
+        <img src={imgHero} alt="header" data-aos="fade-left" />
       </div>
       <div className="header__content">
         <h1 data-aos="fade-up" data-aos-delay="500">
