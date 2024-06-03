@@ -2,9 +2,19 @@ import prisma from "../config/db.config.js";
 
 export const findLaporans = async () => {
     const laporans = await prisma.laporan.findMany({
-        include: {
-            pelapor: true
-        }
+        select: {
+            laporanId: true,
+            lokasiLaporanLat: true,
+            lokasiLaporanLng: true,
+            kategoriSampah: true,
+            dateCreated: true,
+            status: true,
+            pelapor: {
+                select: {
+                    namaPelapor: true,
+                }
+            }
+        },
     });
     return laporans;
 }

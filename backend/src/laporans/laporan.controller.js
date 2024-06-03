@@ -5,7 +5,7 @@ import prisma from "../config/db.config.js";
 import { createLaporanService, editLaporanService, findLaporansService } from "./laporan.service.js";
 import { laporanSchema } from "./laporan.validation.js";
 import { deleteLaporan } from "./laporan.repository.js";
-import { sendMail, sendMailToAdmin } from "../helpers/service.helper.js";
+import { sendNotification } from "../helpers/service.helper.js";
 
 const laporan_router = express.Router();
 
@@ -66,21 +66,17 @@ laporan_router.post("/", fileUpload(), validateData(laporanSchema), validateImag
             }
         })
 
-        await sendMail({
+        await sendNotification({
             mailTo: pelaporLaporan.emailPelapor,
-            mailType: 0,
-        })
-
-        await sendMailToAdmin({
-            mailType: 1,
+            waTo: pelaporLaporan.nomorPelapor,
             laporanId: laporan.laporanId
         })
 
         return res.status(200).json({
             status: 200,
-            message: "Success create laporan",
-            data: pelaporLaporan
+            message: "Success create laporan"
         });
+
     } catch (error) {
         return res.status(500).json({
             status: 500,

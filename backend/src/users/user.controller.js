@@ -94,5 +94,4 @@ user_router.delete("/", requireLogin, async (req, res) => {
     }
 });
 
-
 export default user_router

@@ -37,7 +37,7 @@ export const mailLaporanToAdmin = (data, laporan) => {
                 <a href="" style="font-size:1.4em;color: #00923F;text-decoration:none;font-weight:600">Laporan Tumpukan Sampah Baru</a>
             </div>
             <p style="font-size:1.1em">Kepada Yth. ${data.name},</p>
-            <p style="text-align: justify">Kami ingin memberitahukan bahwa kami telah menerima laporan baru mengenai tumpukan sampah. Berikut adalah rincian laporan yang telah masuk:</p>
+            <p style="text-align: justify">Kami ingin memberitahukan bahwa sistem telah menerima laporan baru mengenai tumpukan sampah. Berikut adalah rincian laporan yang telah masuk:</p>
             <strong>Pelapor                   : </strong>${laporan.pelapor.namaPelapor}<br>
             <strong>Tanggal Laporan           : </strong>${laporan.dateCreated}<br>
             <strong>Kategori Tumpukan         : </strong>${laporan.kategoriSampah == 3 ? "Parah" : (laporan.kategoriSampah == 2 ? "Sedang" : "Kecil")}<br>

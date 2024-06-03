@@ -18,6 +18,7 @@ model User {
   password String  @db.VarChar(100)
   name     String  @db.VarChar(100)
   email    String? @db.VarChar(100)
+  number   String? @db.VarChar(100)
   token    String? @db.VarChar(100)
   dateCreated DateTime @default(now())
   dateUpdated DateTime?
@@ -64,4 +65,16 @@ model Mail {
   mailStatus Int @default(0)
 
   @@map("mails")
+}
+
+model Whatsapp {
+  waId Int @id @default(autoincrement())
+  waTo String @db.VarChar(100)
+  waType Int
+  laporanId Int?
+  dateCreated DateTime @default(now())
+  dateSended DateTime?
+  waStatus Int @default(0)
+
+  @@map("whatsapps")
 }
