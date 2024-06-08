@@ -1,0 +1,72 @@
+:root {
+  --primary-color: #41b06e;
+  --primary-color-light: #b0fce3;
+  --primary-color-dark: red;
+  --text-dark: #1679ab;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 3rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.section__description {
+  color: var(--text-light);
+  line-height: 1.75rem;
+  text-align: center;
+}
+
+.client__container {
+  padding-top: 0;
+  margin-bottom: -20px;
+}
+
+.client__container :is(.section__header, .section__description) {
+  max-width: 600px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.client__swiper {
+  margin-top: 2rem;
+  max-width: 750px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 2px solid rgba(9, 252, 9, 0.5);
+  box-shadow: 5px 5px 30px rgba(9, 252, 211, 0.2);
+  border-radius: 3rem;
+}
+
+.client__card {
+  text-align: center;
+  height: 50vh;
+}
+
+.client__card iframe {
+  margin-bottom: 40px;
+  margin-inline: auto;
+  padding: 10px;
+  border-radius: 5%;
+  margin-top: 10px;
+  height: 40vh;
+  width: 100%;
+}
+
+@media (width > 768px) {
+  .client__swiper {
+    padding: 3rem 2rem;
+  }
+}

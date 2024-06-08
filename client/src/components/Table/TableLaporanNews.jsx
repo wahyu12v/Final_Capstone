@@ -1,0 +1,106 @@
+import { useEffect, useState } from 'react';
+import DataTable from 'react-data-table-component';
+import axiosUtil from '../../utils/axios.utils';
+import TableSkeletonCustom from '../Skeleton/TableSkeleton';
+import formatDateData from '../../utils/time.utils';
+import { Badge } from 'react-bootstrap';
+
+const columns = [
+  {
+    name: 'Nama Pelapor',
+    selector: (row) => row.pelapor.namaPelapor,
+  },
+  {
+    name: 'Waktu dibuat',
+    selector: (row) => formatDateData(row.dateCreated),
+  },
+  {
+    name: 'Kategori',
+    cell: (row) => (
+      <Badge
+        pill
+        bg={
+          row.kategoriSampah === 1
+            ? 'success'
+            : row.kategoriSampah === 2
+            ? 'warning'
+            : 'danger'
+        }
+        text="dark"
+        className="text-white"
+        style={
+          row.kategoriSampah === 3
+            ? { backgroundColor: 'green!important' }
+            : null
+        }
+      >
+        {row.kategoriSampah === 1
+          ? 'Kecil'
+          : row.kategoriSampah === 2
+          ? 'Sedang'
+          : 'Parah'}
+      </Badge>
+    ),
+  },
+];
+export default function TableLaporanNews() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [totalRows, setTotalRows] = useState(0);
+  const [perPage, setPerPage] = useState(10);
+
+  const fetchLaporants = async (page) => {
+    setLoading(true);
+    const response = await axiosUtil.get(
+      `laporans/news?page=${page}&size=${perPage}`
+    );
+    setData(response.data.data.laporans);
+    setTotalRows(response.data.data.pagging.total);
+    setLoading(false);
+  };
+
+  const handlePageChange = (page) => {
+    fetchLaporants(page);
+  };
+
+  const handlePerRowsChange = async (newPerPage, page) => {
+    setLoading(true);
+    const response = await axiosUtil.get(
+      `laporans/news?page=${page}&size=${newPerPage}`
+    );
+    setData(response.data.data.laporans);
+    setPerPage(newPerPage);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchLaporants(1);
+  }, []);
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      progressPending={loading}
+      pagination
+      paginationServer
+      paginationTotalRows={totalRows}
+      progressComponent={<TableSkeletonCustom col={3} rows={5} />}
+      onChangeRowsPerPage={handlePerRowsChange}
+      onChangePage={handlePageChange}
+      customStyles={{
+        headCells: {
+          style: {
+            fontWeight: 'bold',
+            fontSize: '1rem',
+          },
+        },
+        rows: {
+          style: {
+            fontSize: '0.8rem',
+          },
+        },
+      }}
+      responsive
+    />
+  );
+}

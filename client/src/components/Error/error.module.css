@@ -1,0 +1,133 @@
+/* ERROR PAGE */
+.body_error {
+  height: 100vh;
+  padding-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--extra-light);
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav__error {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+}
+
+.nav__error .nav__logo__error a {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.container__error {
+  max-width: 400px;
+  min-height: 78vh;
+  padding: 2rem;
+  margin: auto;
+  display: grid;
+  color: var(--text-dark);
+}
+
+.header__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.header__error h1 {
+  font-size: 4rem;
+  font-weight: 900;
+}
+
+.container__error h3 {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.container__error img {
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.footer__error {
+  display: grid;
+  gap: 2rem;
+  place-content: baseline;
+}
+
+.footer__error p {
+  font-size: 1rem; /* Mengubah font-size */
+}
+
+.footer__error button {
+  padding: 1rem;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  color: var(--extra-light);
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer__error button:hover {
+  background-color: #1679ab;
+}
+
+@media (max-width: 640px) {
+  .container__error {
+    padding-top: 6rem;
+  }
+  .header__error h1 {
+    font-size: 3rem;
+  }
+
+  .header__error h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .nav__error {
+    max-width: 1000px;
+  }
+
+  .container__error {
+    max-width: 1200px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .container__error img {
+    max-width: 550px;
+    grid-area: 1/1/3/2;
+  }
+
+  .footer__error {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container__error {
+    column-gap: 5rem;
+  }
+
+  .header__error h1 {
+    font-size: 6rem;
+  }
+
+  .header__error h3 {
+    font-size: 2.5rem;
+  }
+}

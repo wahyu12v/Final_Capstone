@@ -1,19 +1,13 @@
 import Footer from '../../components/Footer/Footer';
 import Navbar from '../../components/Navbar/Navbar';
+import Error from '../../components/Error/Error';
 
 export default function Notfound() {
   const page = [
     {
       title: 'Home',
-      link: '/#home',
-    },
-    {
-      title: 'Definisi',
-      link: '/#definisi',
-    },
-    {
-      title: 'Team Kami',
-      link: '/#team',
+      link: '/',
+      navigate: true,
     },
     {
       title: 'Laporan',
@@ -25,7 +19,7 @@ export default function Notfound() {
   return (
     <>
       <Navbar page={page} />
-      <div>NOT FOUND</div>
+      <Error status={404} />
       <Footer />
     </>
   );

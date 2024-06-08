@@ -1,21 +1,31 @@
 import imgBertanya from '/src/assets/bertanya.png';
+import styles from './definisi.module.css';
 
 export default function Definisi() {
   return (
     <section
-      className="section__container explore__container"
+      className={`${styles.section__container} ${styles.explore__container}`}
       style={{ marginBottom: 30 }}
       id="definisi"
     >
-      <div className="explore__image">
-        <img src={imgBertanya} alt="tanya" data-aos="fade-right" />
+      <div className={styles.explore__image}>
+        <img
+          className="img__landing"
+          src={imgBertanya}
+          alt="tanya"
+          data-aos="fade-right"
+        />
       </div>
-      <div className="explore__content">
-        <h1 className="section__header" data-aos="fade-up" data-aos-delay="500">
+      <div className={styles.explore__content}>
+        <h1
+          className={styles.section__header}
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
           Apa Itu Sistem PANTAS ?
         </h1>
         <p
-          className="section__description"
+          className={styles.section__description}
           data-aos="fade-up"
           data-aos-delay="1000"
         >

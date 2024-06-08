@@ -1,23 +1,31 @@
 import imgUnggul from '/src/assets/unggul.jpg';
 import { RiCheckboxFill } from 'react-icons/ri';
+import styles from './keunggulan.module.css';
 
 export default function Keunggulan() {
   return (
-    <section className="unggul" id="unggul">
-      <div className="section__container unggul__container">
-        <div className="unggul__image">
-          <img src={imgUnggul} alt="unggul" data-aos="fade-right" />
+    <section className={styles.unggul} id="unggul">
+      <div
+        className={`${styles.section__container} ${styles.unggul__container}`}
+      >
+        <div className={styles.unggul__image}>
+          <img
+            className="img__landing"
+            src={imgUnggul}
+            alt="unggul"
+            data-aos="fade-right"
+          />
         </div>
-        <div className="unggul__content">
+        <div className={styles.unggul__content}>
           <h2
-            className="section__header"
+            className={styles.section__header}
             data-aos="fade-up"
             data-aos-delay="500"
           >
             Keunggulan Menggunakan Sistem Pelaporan Aduan Sampah
           </h2>
           <p
-            className="section__description"
+            className={styles.section__description}
             data-aos="fade-up"
             data-aos-delay="1000"
           >
@@ -25,7 +33,7 @@ export default function Keunggulan() {
             keunggulan yang membantu masyarakat untuk lebih aktif dalam menjaga
             kebersihan lingkungan.
           </p>
-          <ul className="unggul__list">
+          <ul className={styles.unggul__list}>
             <li data-aos="fade-up" data-aos-delay="1500">
               <span>
                 <RiCheckboxFill />
