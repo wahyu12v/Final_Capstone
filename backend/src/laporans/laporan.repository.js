@@ -1,5 +1,47 @@
 import prisma from "../config/db.config.js";
 
+export const findLaporanMasuk = async (params) => {
+    const skip = (params.page - 1) * params.size;
+
+    const laporans = await prisma.laporan.findMany({
+        skip,
+        take: params.size,
+        include: {
+            pelapor: true
+        },
+        orderBy: {
+            dateCreated: 'desc'
+        }
+    });
+    return laporans;
+}
+
+export const findLaporansNews = async (params) => {
+    const skip = (params.page - 1) * params.size;
+
+    const laporans = await prisma.laporan.findMany({
+        skip,
+        take: params.size,
+        select: {
+            laporanId: true,
+            lokasiLaporanLat: true,
+            lokasiLaporanLng: true,
+            kategoriSampah: true,
+            dateCreated: true,
+            status: true,
+            pelapor: {
+                select: {
+                    namaPelapor: true,
+                }
+            }
+        },
+        orderBy: {
+            dateCreated: 'desc'
+        }
+    });
+    return laporans;
+}
+
 export const findLaporans = async () => {
     const laporans = await prisma.laporan.findMany({
         select: {
@@ -19,8 +61,23 @@ export const findLaporans = async () => {
     return laporans;
 }
 
+export const countLaporans = async () => {
+    return prisma.laporan.count()
+}
+
+export const countLaporansByKategori = async (kategori) => {
+    return prisma.laporan.count({ where: { kategoriSampah: kategori } })
+}
+
+export const countLaporanPelapor = async () => {
+    return prisma.pelapor.count()
+}
+
 export const findLaporanById = async (laporanId) => {
     const laporan = await prisma.laporan.findUnique({
+        include: {
+            pelapor: true
+        },
         where: {
             laporanId
         }
@@ -40,7 +97,10 @@ export const editLaporan = async (laporanId, data) => {
         where: {
             laporanId
         },
-        data
+        data,
+        include: {
+            pelapor: true
+        }
     });
     return laporan;
 }

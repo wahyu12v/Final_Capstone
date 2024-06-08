@@ -15,7 +15,10 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(helmet());
+app.use(helmet(helmet({
+    crossOriginResourcePolicy: false,
+})));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors());
 app.use(express.json());
 
