@@ -132,9 +132,9 @@ const Laporan = () => {
                     >
                       <Popup>
                         <b>Kategori tumpukan:</b>{' '}
-                        {item.KategoriSampah === 3
+                        {item.kategoriSampah === 3
                           ? 'Parah'
-                          : item.KategoriSampah === 2
+                          : item.kategoriSampah === 2
                           ? 'Sedang'
                           : 'Kecil'}
                         <br />
@@ -151,16 +151,16 @@ const Laporan = () => {
                         pathOptions={{
                           color: 'none',
                           fillColor:
-                            item.KategoriSampah === 3
+                            item.kategoriSampah === 3
                               ? 'red'
-                              : item.KategoriSampah === 2
+                              : item.kategoriSampah === 2
                               ? 'orange'
                               : 'green',
                         }}
                         radius={
-                          item.KategoriSampah === 3
+                          item.kategoriSampah === 3
                             ? 200
-                            : item.KategoriSampah === 2
+                            : item.kategoriSampah === 2
                             ? 150
                             : 100
                         }
