@@ -51,6 +51,11 @@ export default function Sidebar({ children }) {
       return toast.error('Gagal menghubungkan ke server');
     }
   }
+
+  if (userData && userData.data && userData.data.token) {
+    localStorage.setItem('token', userData.data.token);
+  }
+
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/masuk');

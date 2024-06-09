@@ -43,6 +43,7 @@ const columns = [
     ),
   },
 ];
+
 export default function TableLaporanNews() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,6 +55,9 @@ export default function TableLaporanNews() {
     const response = await axiosUtil.get(
       `laporans/news?page=${page}&size=${perPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setTotalRows(response.data.data.pagging.total);
     setLoading(false);
@@ -68,6 +72,9 @@ export default function TableLaporanNews() {
     const response = await axiosUtil.get(
       `laporans/news?page=${page}&size=${newPerPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setPerPage(newPerPage);
     setLoading(false);
@@ -76,6 +83,7 @@ export default function TableLaporanNews() {
   useEffect(() => {
     fetchLaporants(1);
   }, []);
+
   return (
     <DataTable
       columns={columns}

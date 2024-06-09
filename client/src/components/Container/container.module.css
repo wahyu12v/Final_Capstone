@@ -45,7 +45,8 @@
 
 .container {
   margin-top: 1.4rem;
-  width: auto;
+  width: 122%;
+  z-index: 9;
 }
 .container input {
   background-color: transparent;
@@ -207,6 +208,10 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .container {
+    width: 84vh;
+    z-index: 1;
+  }
   .container .insights {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -214,6 +219,10 @@
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    width: 59vh;
+    z-index: 1;
+  }
   .container .insights {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
