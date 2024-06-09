@@ -77,6 +77,12 @@ ScrollReveal().reveal(" .container_form", {
 
 
 
+ScrollReveal().reveal(" .containerbutton", {
+  ...scrollRevealOption,
+  delay: 500,
+});
+
+
 
 var swiper = new Swiper('.swiper', {
   slidesPerView: 1,
