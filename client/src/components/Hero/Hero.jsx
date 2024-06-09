@@ -27,15 +27,7 @@ export default function Hero() {
           Tempat dimana anda bisa berkontribusi dalam meningkatkan lingkungan
           yang bersih dengan melakukan pelaporan adanya tumpukan sampah liar.
         </p>
-        <div
-          className={styles.header__btn}
-          data-aos="fade-up"
-          data-aos-delay="1500"
-        >
-          <button className="btn__landing">
-            <a href="#cara">Get Started</a>{' '}
-          </button>
-        </div>
+        <div className={styles.header__btn}></div>
       </div>
     </header>
   );

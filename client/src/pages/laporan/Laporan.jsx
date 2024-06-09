@@ -19,10 +19,17 @@ import Cara from '../../components/Cara/Cara';
 import Tutorial from '../../components/Tutorial/Tutorial';
 import LaporanSection from '../../components/Laporan/LaporanSection';
 import imgIcon from '/src/assets/marker-icon.png';
+import imgRIcon from '/src/assets/recyle-icon.png';
+import { getListLaporanLand } from '../../actions/laporan.action';
+import Moment from 'react-moment';
+import 'moment/locale/id';
 
 const Laporan = () => {
   const hasRun = useRef(false);
   const [location, setLocation] = useState(null);
+
+  const { data: dataLaporan, isPending: isPendingLaporan } =
+    getListLaporanLand();
 
   useEffect(() => {
     if (!hasRun.current) {
@@ -64,6 +71,13 @@ const Laporan = () => {
     iconUrl: imgIcon,
     iconRetinaUrl: imgIcon,
     iconSize: [25, 41],
+  });
+  const iconTemp = L.icon({
+    iconUrl: imgRIcon,
+    iconRetinaUrl: imgRIcon,
+    iconSize: [100, 100],
+    iconAnchor: [50, 65],
+    popupAnchor: [-1, -45],
   });
 
   const page = [
@@ -107,6 +121,52 @@ const Laporan = () => {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <LocationMaker />
+                {dataLaporan &&
+                  dataLaporan.data &&
+                  dataLaporan.data.length > 0 &&
+                  dataLaporan.data.map((item) => (
+                    <Marker
+                      position={[item.lokasiLaporanLat, item.lokasiLaporanLng]}
+                      icon={iconTemp}
+                      key={item.laporanId}
+                    >
+                      <Popup>
+                        <b>Kategori tumpukan:</b>{' '}
+                        {item.kategoriSampah === 3
+                          ? 'Parah'
+                          : item.kategoriSampah === 2
+                          ? 'Sedang'
+                          : 'Kecil'}
+                        <br />
+                        <b>Dilaporkan pada:</b>{' '}
+                        <Moment locale="id" format="dddd, DD MMMM YYYY hh:mm">
+                          {item.dateCreated}
+                        </Moment>
+                      </Popup>
+                      <Circle
+                        center={{
+                          lat: item.lokasiLaporanLat,
+                          lng: item.lokasiLaporanLng,
+                        }}
+                        pathOptions={{
+                          color: 'none',
+                          fillColor:
+                            item.kategoriSampah === 3
+                              ? 'red'
+                              : item.kategoriSampah === 2
+                              ? 'orange'
+                              : 'green',
+                        }}
+                        radius={
+                          item.kategoriSampah === 3
+                            ? 200
+                            : item.kategoriSampah === 2
+                            ? 150
+                            : 100
+                        }
+                      />
+                    </Marker>
+                  ))}
                 {location && location.loaded && !location.error && (
                   <Marker
                     position={[
@@ -121,7 +181,7 @@ const Laporan = () => {
                         lat: location.coordinates.lat,
                         lng: location.coordinates.lng,
                       }}
-                      pathOptions={{ color: 'none', fillColor: 'red' }}
+                      pathOptions={{ color: 'none', fillColor: 'cyan' }}
                       radius={200}
                     />
                   </Marker>

@@ -28,6 +28,16 @@ export const createLaporan = ({ onSuccess, onError }) => {
     })
 }
 
+export const getListLaporanLand = () => {
+    return useQuery({
+        queryKey: ["getListLaporanLand"],
+        queryFn: async () => {
+            const res = await axios.get(`${import.meta.env.VITE_BASE_URL}laporans/`)
+            return res.data
+        }
+    })
+}
+
 export const fetchDbLaporan = () => {
     return useQuery({
         queryKey: ["fetchDbLaporan"],

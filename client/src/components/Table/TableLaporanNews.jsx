@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axiosUtil from '../../utils/axios.utils';
 import TableSkeletonCustom from '../Skeleton/TableSkeleton';
-import formatDateData from '../../utils/time.utils';
 import { Badge } from 'react-bootstrap';
+import Moment from 'react-moment';
+import 'moment/locale/id';
 
 const columns = [
   {
@@ -12,7 +13,11 @@ const columns = [
   },
   {
     name: 'Waktu dibuat',
-    selector: (row) => formatDateData(row.dateCreated),
+    selector: (row) => (
+      <Moment locale="id" fromNow>
+        {row.dateCreated}
+      </Moment>
+    ),
   },
   {
     name: 'Kategori',
@@ -43,6 +48,7 @@ const columns = [
     ),
   },
 ];
+
 export default function TableLaporanNews() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,6 +60,9 @@ export default function TableLaporanNews() {
     const response = await axiosUtil.get(
       `laporans/news?page=${page}&size=${perPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setTotalRows(response.data.data.pagging.total);
     setLoading(false);
@@ -68,6 +77,9 @@ export default function TableLaporanNews() {
     const response = await axiosUtil.get(
       `laporans/news?page=${page}&size=${newPerPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setPerPage(newPerPage);
     setLoading(false);
@@ -76,6 +88,7 @@ export default function TableLaporanNews() {
   useEffect(() => {
     fetchLaporants(1);
   }, []);
+
   return (
     <DataTable
       columns={columns}

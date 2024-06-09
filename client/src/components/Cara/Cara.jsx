@@ -1,5 +1,7 @@
 import { RiEarthFill, RiMapPinFill, RiFileListFill } from 'react-icons/ri';
 import styles from './cara.module.css';
+import { Link } from 'react-router-dom';
+import { IoPaperPlaneOutline } from 'react-icons/io5';
 
 export default function Cara() {
   return (
@@ -68,6 +70,13 @@ export default function Cara() {
             seperti lokasi dan jenis sampah yang dilaporkan.
           </p>
         </div>
+      </div>
+      <div className={styles.containerbutton}>
+        <button className={styles['button-33']} role="button">
+          <Link to="/lapor#form" reloadDocument replace>
+            <IoPaperPlaneOutline size={26} /> Ayo Laporkan Sekarang{' '}
+          </Link>
+        </button>
       </div>
     </section>
   );

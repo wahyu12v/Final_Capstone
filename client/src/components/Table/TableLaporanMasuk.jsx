@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axiosUtil from '../../utils/axios.utils';
 import TableSkeletonCustom from '../Skeleton/TableSkeleton';
-import { Badge } from 'react-bootstrap';
+import { Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import {
+  IoCheckmarkCircleOutline,
   IoCheckmarkDoneSharp,
-  IoCheckmarkSharp,
-  IoCloseSharp,
+  IoCloseCircleOutline,
   IoEyeOutline,
   IoPaperPlane,
 } from 'react-icons/io5';
@@ -27,6 +27,9 @@ export default function TableLaporanMasuk() {
     const response = await axiosUtil.get(
       `laporans/data-masuk?page=${page}&size=${perPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setTotalRows(response.data.data.pagging.total);
     setLoading(false);
@@ -41,6 +44,9 @@ export default function TableLaporanMasuk() {
     const response = await axiosUtil.get(
       `laporans/data-masuk?page=${page}&size=${newPerPage}`
     );
+    if (response && response.data && response.data.token) {
+      localStorage.setItem('token', response.data.token);
+    }
     setData(response.data.data.laporans);
     setPerPage(newPerPage);
     setLoading(false);
@@ -50,6 +56,9 @@ export default function TableLaporanMasuk() {
     updateLaporan({
       onSuccess: (data) => {
         if (data.status === 200) {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+          }
           toast.success('Laporan diterima', { id: toastId.current });
           fetchLaporants(1);
         } else {
@@ -67,6 +76,9 @@ export default function TableLaporanMasuk() {
     updateLaporan({
       onSuccess: (data) => {
         if (data.status === 200) {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+          }
           toast.success('Laporan diprosess', { id: toastId.current });
           fetchLaporants(1);
         } else {
@@ -84,6 +96,9 @@ export default function TableLaporanMasuk() {
     updateLaporan({
       onSuccess: (data) => {
         if (data.status === 200) {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+          }
           toast.success('Laporan telah diselesaikan', { id: toastId.current });
           fetchLaporants(1);
         } else {
@@ -101,6 +116,9 @@ export default function TableLaporanMasuk() {
     updateLaporan({
       onSuccess: (data) => {
         if (data.status === 200) {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+          }
           toast.success('Laporan telah ditolak', { id: toastId.current });
           fetchLaporants(1);
         } else {
@@ -264,46 +282,78 @@ export default function TableLaporanMasuk() {
       cell: (row) => (
         <>
           {row.status !== 3 && row.status !== 4 && (
-            <a
-              className={'text-success mx-0'}
-              style={{ cursor: 'pointer' }}
-              onClick={() =>
-                row.status === 0
-                  ? terimaLaporan(row.laporanId)
-                  : row.status === 1
-                  ? prosessLaporan(row.laporanId)
-                  : selesaikanLaporan(row.laporanId)
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip>
+                  {row.status === 0
+                    ? 'Terima Laporan'
+                    : row.status === 1
+                    ? 'Proses Laporan'
+                    : 'Selesaikan Laporan'}
+                </Tooltip>
               }
             >
-              {row.status === 0 ? (
-                <IoCheckmarkSharp />
-              ) : row.status === 1 ? (
-                <IoPaperPlane />
-              ) : (
-                <IoCheckmarkDoneSharp />
+              {({ ref, ...triggerHandler }) => (
+                <a
+                  className={'text-success mx-0'}
+                  style={{ cursor: 'pointer' }}
+                  {...triggerHandler}
+                  onClick={() =>
+                    row.status === 0
+                      ? terimaLaporan(row.laporanId)
+                      : row.status === 1
+                      ? prosessLaporan(row.laporanId)
+                      : selesaikanLaporan(row.laporanId)
+                  }
+                  ref={ref}
+                >
+                  {row.status === 0 ? (
+                    <IoCheckmarkCircleOutline size={28} />
+                  ) : row.status === 1 ? (
+                    <IoPaperPlane size={28} />
+                  ) : (
+                    <IoCheckmarkDoneSharp size={28} />
+                  )}
+                </a>
               )}
-              {row.status === 0
-                ? ' Terima'
-                : row.status === 1
-                ? ' Proses'
-                : ' Selesai'}
-            </a>
+            </OverlayTrigger>
           )}
-
-          <a
-            className={'text-danger mx-2 px-0'}
-            style={{ cursor: 'pointer' }}
-            onClick={() => tolakLaporan(row.laporanId)}
+          {row.status !== 3 && row.status !== 4 && (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Tolak Laporan</Tooltip>}
+            >
+              {({ ref, ...triggerHandler }) => (
+                <a
+                  className={'text-danger mx-2 px-0'}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => tolakLaporan(row.laporanId)}
+                  {...triggerHandler}
+                  ref={ref}
+                >
+                  <IoCloseCircleOutline size={28} />
+                </a>
+              )}
+            </OverlayTrigger>
+          )}
+          <OverlayTrigger
+            placement="top"
+            overlay={<Tooltip>Lihat Laporan</Tooltip>}
           >
-            <IoCloseSharp /> Tolak
-          </a>
-          <Link
-            to={`/dashboard/laporan/${row.laporanId}`}
-            className={'text-primary mx-0 px-0'}
-            style={{ cursor: 'pointer' }}
-          >
-            <IoEyeOutline /> Lihat
-          </Link>
+            {({ ref, ...triggerHandler }) => (
+              <Link
+                to={`/dashboard/laporan/${row.laporanId}`}
+                className={'text-primary mx-0 px-0'}
+                style={{ cursor: 'pointer' }}
+                {...triggerHandler}
+                ref={ref}
+                reloadDocument
+              >
+                <IoEyeOutline size={28} />
+              </Link>
+            )}
+          </OverlayTrigger>
         </>
       ),
     },

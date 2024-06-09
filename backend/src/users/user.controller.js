@@ -9,6 +9,7 @@ const user_router = express.Router();
 
 user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
     try {
+        let user;
         const userLogin = req.body;
 
         if (!userLogin.username || !userLogin.password) {
@@ -36,17 +37,27 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
             });
         }
 
-        const user = await editUserByUsername(userLogin.username, { token: uuid() });
+        if (!isUsernameExist.token) {
+            user = await editUserByUsername(userLogin.username, { token: uuid() });
+        } else {
+            user = isUsernameExist
+        }
 
+        const accessToken = jwt.sign({ username: user.username }, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN });
+        const refreshToken = jwt.sign({ token: user.token }, process.env.JWT_REFRESH_TOKEN_SECRET, { expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN });
 
-        const token = jwt.sign({ token: user.token }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            maxAge: 48 * 60 * 60 * 1000,
+            secure: true,
+            sameSite: "strict"
+        });
         return res.status(200).json({
             status: 200,
             message: "Login success",
             data: {
                 username: user.username,
-                token: token,
+                token: accessToken,
                 name: user.name
             }
         });
@@ -60,14 +71,25 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
 
 user_router.get("/", requireLogin, async (req, res) => {
     try {
-        const { username } = req.body;
+        const { username, accessToken } = req.body;
         const user = await getUserByUsername(username);
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Get user success",
+                data: {
+                    username: user.username,
+                    name: user.name,
+                    token: accessToken
+                }
+            })
+        }
         return res.status(200).json({
             status: 200,
             message: "Get user success",
             data: {
                 username: user.username,
-                name: user.name
+                name: user.name,
             }
         });
     } catch (error) {
