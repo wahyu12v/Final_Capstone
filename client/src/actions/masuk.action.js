@@ -1,14 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosUtil from "../utils/axios.utils";
 
-export const actionMasuk = ({ onSuccess }) => {
+export const actionMasuk = ({ onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["actionMasuk"],
         mutationFn: async (body) => {
             const res = await axiosUtil.post("/users/login", body)
             return res.data
         },
-        onSuccess
+        onSuccess,
+        onError
     })
 }
 

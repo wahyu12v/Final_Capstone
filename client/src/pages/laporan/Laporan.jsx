@@ -7,6 +7,7 @@ import {
   useMap,
   Circle,
 } from 'react-leaflet';
+import L from 'leaflet';
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import Footer from '../../components/Footer/Footer';
@@ -17,6 +18,7 @@ import LaporanHero from '../../components/Laporan/LaporanHero';
 import Cara from '../../components/Cara/Cara';
 import Tutorial from '../../components/Tutorial/Tutorial';
 import LaporanSection from '../../components/Laporan/LaporanSection';
+import imgIcon from '/src/assets/marker-icon.png';
 
 const Laporan = () => {
   const hasRun = useRef(false);
@@ -57,6 +59,13 @@ const Laporan = () => {
     }, [location]);
     return <></>;
   };
+
+  const icon = L.icon({
+    iconUrl: imgIcon,
+    iconRetinaUrl: imgIcon,
+    iconSize: [25, 41],
+  });
+
   const page = [
     {
       title: 'Home',
@@ -104,6 +113,7 @@ const Laporan = () => {
                       location.coordinates.lat,
                       location.coordinates.lng,
                     ]}
+                    icon={icon}
                   >
                     <Popup>Posisi anda saat ini</Popup>
                     <Circle

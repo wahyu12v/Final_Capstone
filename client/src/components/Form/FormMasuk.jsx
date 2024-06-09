@@ -18,32 +18,29 @@ export default function FormMasuk() {
     },
   });
 
-  const {
-    mutate: submitFormMasuk,
-    isPending: formMasukIsPending,
-    isError: formMasukIsError,
-    error,
-  } = actionMasuk({
-    onSuccess: (data) => {
-      if (data.status === 200) {
-        if (data.data && data.data.token) {
-          localStorage.setItem('token', data.data.token);
-          toast.success('Masuk Berhasil');
-          setTimeout(() => navigate('/dashboard'), 1000);
+  const { mutate: submitFormMasuk, isPending: formMasukIsPending } =
+    actionMasuk({
+      onSuccess: (data) => {
+        if (data.status === 200) {
+          if (data.data && data.data.token) {
+            localStorage.setItem('token', data.data.token);
+            toast.success('Masuk Berhasil');
+            setTimeout(() => navigate('/dashboard'), 1000);
+          }
+        } else {
+          toast.error('Username atau Password Salah');
         }
-      } else {
-        toast.error('Username atau Password Salah');
-      }
-    },
-  });
-
-  if (formMasukIsError) {
-    if (error && error.response && error.response.status === 400) {
-      toast.error('Username atau Password Salah');
-    }
-    if (error) toast.error('Gagal menghubungkan ke server');
-  }
-
+      },
+      onError: (error) => {
+        if (error && error.response && error.response.status === 400) {
+          return toast.error('Username atau Password Salah');
+        } else if (error && error.response) {
+          return toast.error('Gagal menghubungkan ke server');
+        } else {
+          return toast.error('Gagal menghubungkan ke server');
+        }
+      },
+    });
   const handleFormInput = (e) => {
     formik.setFieldValue(e.target.name, e.target.value);
   };

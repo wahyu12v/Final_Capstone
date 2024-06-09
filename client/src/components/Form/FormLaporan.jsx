@@ -29,28 +29,26 @@ export default function FormLaporan({ lat, lng }) {
     formik.setFieldValue('lng', lng);
   }, [lat, lng]);
 
-  const {
-    mutate: submitFormLaporan,
-    isPending: formLaporanIsPending,
-    isError: formLaporanIsError,
-    error,
-  } = createLaporan({
-    onSuccess: (data) => {
-      if (data.status === 200) {
-        toast.success('Laporan berhasil dikirim');
-        formik.resetForm();
-      } else {
-        toast.error('Laporan gagal dikirim');
-      }
-    },
-  });
-
-  if (formLaporanIsError) {
-    if (error && error.response && error.response.status === 400) {
-      toast.error('Laporan gagal dikirim');
-    }
-    if (error) toast.error('Gagal menghubungkan ke server');
-  }
+  const { mutate: submitFormLaporan, isPending: formLaporanIsPending } =
+    createLaporan({
+      onSuccess: (data) => {
+        if (data.status === 200) {
+          toast.success('Laporan berhasil dikirim');
+          formik.resetForm();
+        } else {
+          toast.error('Laporan gagal dikirim');
+        }
+      },
+      onError: (error) => {
+        if (error && error.response && error.response.status === 400) {
+          return toast.error('Laporan gagal dikirim');
+        } else if (error && error.response) {
+          return toast.error('Gagal menghubungkan ke server');
+        } else {
+          return toast.error('Gagal menghubungkan ke server');
+        }
+      },
+    });
 
   const handleFormInput = (e) => {
     formik.setFieldValue(e.target.name, e.target.value);

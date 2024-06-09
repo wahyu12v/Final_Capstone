@@ -22,7 +22,7 @@ export default function Sidebar({ children }) {
   const userKeluar = () => {
     const promise = async () => {
       try {
-        await axiosUtil.get('/users/logout');
+        await axiosUtil.delete('/users');
       } catch (error) {
         throw new Error(error);
       }
@@ -39,19 +39,17 @@ export default function Sidebar({ children }) {
       },
       error: 'Gagal Keluar',
     });
-
-    setTimeout(() => {
-      localStorage.clear();
-      navigate('/masuk');
-    }, 2000);
   };
 
   if (isErrorUserData) {
     if (error && error.response && error.response.status === 401) {
       localStorage.clear();
       navigate('/masuk');
+    } else if (error && error.response) {
+      return toast.error('Gagal menghubungkan ke server');
+    } else {
+      return toast.error('Gagal menghubungkan ke server');
     }
-    if (error) toast.error('Gagal menghubungkan ke server');
   }
   useEffect(() => {
     if (!localStorage.getItem('token')) {

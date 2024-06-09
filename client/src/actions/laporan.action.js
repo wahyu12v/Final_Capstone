@@ -3,7 +3,7 @@ import axios from "axios"
 import { debouncePromise, memoizeWithInvalidation } from "../utils/memo.utils";
 import axiosUtil from "../utils/axios.utils";
 
-export const createLaporan = ({ onSuccess }) => {
+export const createLaporan = ({ onSuccess, onError }) => {
     return useMutation({
         mutationKey: ["createLaporan"],
         mutationFn: async (body) => {
@@ -23,7 +23,8 @@ export const createLaporan = ({ onSuccess }) => {
             })
             return res.data;
         },
-        onSuccess
+        onSuccess,
+        onError
     })
 }
 
@@ -73,7 +74,7 @@ export const updateLaporan = ({ onSuccess, onError, onMutate }) => {
 
 export const debounceCheckWaNumber = debouncePromise(async (number) => {
     try {
-        const res = await axios.post(`http://localhost:3000/check-number`, { number: number }, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}check-number`, { number: number }, {
             headers: {
                 "Content-Type": "application/json",
             }
@@ -86,7 +87,7 @@ export const debounceCheckWaNumber = debouncePromise(async (number) => {
 
 export const memoizedCheckWaNumber = memoizeWithInvalidation(async (number) => {
     try {
-        const res = await axios.post(`http://localhost:3000/check-number`, { number: number }, {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}check-number`, { number: number }, {
             headers: {
                 "Content-Type": "application/json",
             }
