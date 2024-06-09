@@ -178,14 +178,7 @@ nav {
   margin-bottom: 2rem;
 }
 
-.header__btn {
-  text-align: center;
-}
 
-.header__btn a {
-  text-decoration: none;
-  color: white;
-}
 
 .special__container :is(.section__header, .section__description) {
   max-width: 600px;
