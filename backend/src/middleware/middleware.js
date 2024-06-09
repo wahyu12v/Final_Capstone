@@ -11,22 +11,73 @@ export const requireLogin = async (req, res, next) => {
         });
     }
 
-    const JWTToken = req.headers.authorization.split(" ").pop();
+    if (!req.headers.authorization.startsWith("Bearer ")) {
+        return res.status(401).json({
+            status: 401,
+            message: "Unauthorized action"
+        });
+    }
+
+    const accessToken = req.headers.authorization.split(" ").pop();
 
     try {
-        const data = jwt.verify(JWTToken, process.env.JWT_SECRET);
-        const user = await getUserByToken(data.token);
+        jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN_SECRET, (err, data) => {
+            if (err && err.name === "TokenExpiredError") {
+                renewAccessToken(req, res, next)
+            } else if (err) {
+                return res.status(401).json({
+                    status: 401,
+                    message: err.message
+                });
+            }
+            if (data) {
+                req.body.username = data.username;
+                next();
+            }
+        });
+    } catch (error) {
+        return res.status(401).json({
+            status: 401,
+            message: error.message
+        })
+    }
+}
 
-        if (!user) {
-            return res.status(401).json({
-                status: 401,
-                message: "Unauthorized action"
-            });
-        }
-
-        req.body.username = user.username;
-        next();
-
+export const renewAccessToken = async (req, res, next) => {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) {
+        return res.status(401).json({
+            status: 401,
+            message: "Unauthorized action"
+        });
+    }
+    try {
+        jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET, async (err, data) => {
+            if (err && err.name === "TokenExpiredError") {
+                return res.status(401).json({
+                    status: 401,
+                    message: err.message
+                });
+            } else if (err) {
+                return res.status(401).json({
+                    status: 401,
+                    message: "Unauthorized action"
+                });
+            }
+            if (data) {
+                const user = await getUserByToken(data.token);
+                if (!user) {
+                    return res.status(401).json({
+                        status: 401,
+                        message: "Unauthorized action"
+                    });
+                }
+                const accessToken = jwt.sign({ username: user.username }, process.env.JWT_ACCESS_TOKEN_SECRET, { expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRES_IN });
+                req.body.accessToken = accessToken;
+                req.body.username = user.username;
+                next();
+            }
+        });
     } catch (error) {
         return res.status(401).json({
             status: 401,

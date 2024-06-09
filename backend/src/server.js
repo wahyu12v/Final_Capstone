@@ -9,6 +9,7 @@ import { connectToWhatsApp, sessionOnMap } from "./config/wa.config.js";
 import cronJobScheduler from "./helpers/cron.helper.js";
 import { whatsappController } from "./whatsapp/whatsapp.controller.js";
 import helmet from "helmet";
+import cookieParser from 'cookie-parser'
 import { limiter } from "./config/limit.config.js";
 
 dotenv.config();
@@ -19,9 +20,12 @@ app.use(helmet(helmet({
     crossOriginResourcePolicy: false,
 })));
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(cors());
+app.use(cors({
+    origin: [process.env.CLIENT_URL],
+    credentials: true,
+}));
 app.use(express.json());
-
+app.use(cookieParser())
 app.use(limiter);
 
 connectToWhatsApp();

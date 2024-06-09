@@ -27,6 +27,7 @@ laporan_router.get("/", async (req, res) => {
 
 laporan_router.get('/news', requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const page = req.query.page || 1
         const size = req.query.size || 10
         const params = {
@@ -34,6 +35,14 @@ laporan_router.get('/news', requireLogin, async (req, res) => {
             size: parseInt(size)
         }
         const laporans = await findLaporanNewsService(params);
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success get laporans",
+                token: accessToken,
+                data: laporans
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: "Success get laporans",
@@ -49,7 +58,16 @@ laporan_router.get('/news', requireLogin, async (req, res) => {
 
 laporan_router.get('/db', requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const laporans = await findLaporanDbService();
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success get laporans",
+                token: accessToken,
+                data: laporans
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: "Success get Db laporans",
@@ -65,6 +83,7 @@ laporan_router.get('/db', requireLogin, async (req, res) => {
 
 laporan_router.get('/data-masuk', requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const page = req.query.page || 1
         const size = req.query.size || 10
         const params = {
@@ -72,6 +91,14 @@ laporan_router.get('/data-masuk', requireLogin, async (req, res) => {
             size: parseInt(size)
         }
         const laporans = await findLaporanMasukService(params);
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success get laporans",
+                token: accessToken,
+                data: laporans
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: "Success get laporans",
@@ -147,8 +174,17 @@ laporan_router.post("/", fileUpload(), validateData(laporanSchema), validateImag
 
 laporan_router.get("/:laporanId", requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const { laporanId } = req.params;
         const laporans = await findLaporanByIdService(parseInt(laporanId));
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success get laporans",
+                token: accessToken,
+                data: laporans
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: "Success get laporans",
@@ -164,8 +200,16 @@ laporan_router.get("/:laporanId", requireLogin, async (req, res) => {
 
 laporan_router.delete("/:laporanId", requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const { laporanId } = req.params;
         await deleteLaporan(parseInt(laporanId));
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success delete laporan",
+                token: accessToken
+            });
+        }
         return res.status(200).json({
             status: 200,
             message: "Success delete laporan"
@@ -180,6 +224,7 @@ laporan_router.delete("/:laporanId", requireLogin, async (req, res) => {
 
 laporan_router.patch("/:laporanId", requireLogin, async (req, res) => {
     try {
+        const { accessToken } = req.body;
         const { laporanId } = req.params;
         const { username, ...dataUpdate } = req.body;
         const laporan = await editLaporanService(
@@ -210,6 +255,15 @@ laporan_router.patch("/:laporanId", requireLogin, async (req, res) => {
                     waTo: laporan.pelapor.nomorPelapor,
                 })
             }
+        }
+
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Success update laporan",
+                token: accessToken,
+                data: laporan
+            });
         }
         return res.status(200).json({
             status: 200,
