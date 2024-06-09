@@ -209,7 +209,7 @@
 
 @media screen and (max-width: 1200px) {
   .container {
-    width: 84vh;
+    width: 100vw;
     z-index: 1;
   }
   .container .insights {
@@ -220,7 +220,7 @@
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 59vh;
+    width: 100vw;
     z-index: 1;
   }
   .container .insights {
