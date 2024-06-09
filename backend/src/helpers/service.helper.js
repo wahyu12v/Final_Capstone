@@ -35,6 +35,70 @@ export const sendMailToAdmin = async (data) => {
 
 }
 
+export const sendNotificationApprove = async ({ mailTo, waTo }) => {
+    try {
+        await sendMail({
+            mailTo,
+            mailType: 2,
+        })
+
+        await sendWhatsapp({
+            waTo,
+            waType: 2
+        })
+    } catch (error) {
+        return error
+    }
+}
+
+export const sendNotificationProcess = async ({ mailTo, waTo }) => {
+    try {
+        await sendMail({
+            mailTo,
+            mailType: 3,
+        })
+
+        await sendWhatsapp({
+            waTo,
+            waType: 3
+        })
+    } catch (error) {
+        return error
+    }
+}
+
+export const sendNotificationCompleted = async ({ mailTo, waTo }) => {
+    try {
+        await sendMail({
+            mailTo,
+            mailType: 4,
+        })
+
+        await sendWhatsapp({
+            waTo,
+            waType: 4
+        })
+    } catch (error) {
+        return error
+    }
+}
+
+export const sendNotificationReject = async ({ mailTo, waTo }) => {
+    try {
+        await sendMail({
+            mailTo,
+            mailType: 5,
+        })
+
+        await sendWhatsapp({
+            waTo,
+            waType: 5
+        })
+    } catch (error) {
+        return error
+    }
+}
+
 export const sendNotification = async ({ mailTo, waTo, laporanId }) => {
     try {
         await sendMail({

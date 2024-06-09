@@ -1,22 +1,27 @@
 import { RiEarthFill, RiMapPinFill, RiFileListFill } from 'react-icons/ri';
+import styles from './cara.module.css';
+
 export default function Cara() {
   return (
-    <section className="section__container special__container" id="cara">
-      <h2 className="section__header">
+    <section
+      className={`${styles['section__container']} ${styles['special__container']}`}
+      id="cara"
+    >
+      <h2 className={styles.section__header}>
         Bagaimana Cara menggunakan sistem ini ?
       </h2>
-      <p className="section__description">
+      <p className={styles.section__description}>
         Berikut Adalah Penjelasan singkat Bagaimana cara sistem kami digunakan
         oleh pengguna
       </p>
-      <div className="special__grid">
+      <div className={styles.special__grid}>
         <div
-          className="banner__card"
+          className={styles.banner__card}
           style={{ backgroundColor: 'white' }}
           data-aos="fade-up"
           data-aos-delay="500"
         >
-          <span className="banner__icon">
+          <span className={styles.banner__icon}>
             <RiEarthFill />
           </span>
           <h4> Akses Platform PANTAS</h4>
@@ -29,12 +34,12 @@ export default function Cara() {
           </p>
         </div>
         <div
-          className="banner__card"
+          className={styles.banner__card}
           style={{ backgroundColor: 'white' }}
           data-aos="fade-up"
           data-aos-delay="1000"
         >
-          <span className="banner__icon">
+          <span className={styles.banner__icon}>
             <RiMapPinFill />
           </span>
           <h4>Aktifkan Lokasi dan Ambil Foto</h4>
@@ -46,12 +51,12 @@ export default function Cara() {
           </p>
         </div>
         <div
-          className="banner__card"
+          className={styles.banner__card}
           style={{ backgroundColor: 'white' }}
           data-aos="fade-up"
           data-aos-delay="1500"
         >
-          <span className="banner__icon">
+          <span className={styles.banner__icon}>
             <RiFileListFill />
           </span>
           <h4>Kirimkan Laporan yang anda buat</h4>

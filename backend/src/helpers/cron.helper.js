@@ -1,10 +1,10 @@
 import cron from "node-cron";
 import fs from 'fs';
 import prisma from "../config/db.config.js";
-import { mailLaporanToAdmin, mailLaporanToUser } from "./mail.helper.js";
+import { mailLaporanToAdmin, mailLaporanToUser, mailLaporanToUserApprove, mailLaporanToUserComplete, mailLaporanToUserProcess, mailLaporanToUserRejected } from "./mail.helper.js";
 import { sendMailTransport } from "../config/mail.config.js";
 import { phoneNumberFormatter } from "./formatter.helper.js";
-import { whatsappToAdmin, whatsappToUser } from "./whatsapp.helper.js";
+import { whatsappToAdmin, whatsappToUser, whatsappToUserApprove, whatsappToUserComplete, whatsappToUserProcess, whatsappToUserReject } from "./whatsapp.helper.js";
 
 let mailRun = false
 let waRun = false
@@ -66,7 +66,6 @@ export default function cronJobScheduler(sessionMap, connectToWhatsApp) {
                                     })
                                 }
                                 break;
-
                             case 1:
                                 try {
                                     const number = phoneNumberFormatter(data.waTo)
@@ -86,6 +85,174 @@ export default function cronJobScheduler(sessionMap, connectToWhatsApp) {
                                             }
                                         })
                                         await conn.sendMessage(exists.jid || exists[0].jid, { text: whatsappToAdmin(admin, laporan) })
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                dateSended: new Date(),
+                                                waStatus: 1
+                                            }
+                                        })
+                                    } else {
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                waStatus: 3
+                                            }
+                                        })
+                                    }
+                                } catch (error) {
+                                    console.log(error)
+                                    await prisma.whatsapp.update({
+                                        where: {
+                                            waId: data.waId
+                                        },
+                                        data: {
+                                            waStatus: 2
+                                        }
+                                    })
+                                }
+                                break;
+                            case 2:
+                                try {
+                                    const number = phoneNumberFormatter(data.waTo)
+                                    const exists = await conn.onWhatsApp(number)
+                                    if (exists?.jid || (exists && exists[0]?.jid)) {
+                                        const pelapor = await prisma.pelapor.findFirst({
+                                            where: {
+                                                nomorPelapor: data.waTo
+                                            }
+                                        })
+                                        await conn.sendMessage(exists.jid || exists[0].jid, { text: whatsappToUserApprove(pelapor) })
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                dateSended: new Date(),
+                                                waStatus: 1
+                                            }
+                                        })
+                                    } else {
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                waStatus: 3
+                                            }
+                                        })
+                                    }
+                                } catch (error) {
+                                    console.log(error)
+                                    await prisma.whatsapp.update({
+                                        where: {
+                                            waId: data.waId
+                                        },
+                                        data: {
+                                            waStatus: 2
+                                        }
+                                    })
+                                }
+                                break;
+                            case 3:
+                                try {
+                                    const number = phoneNumberFormatter(data.waTo)
+                                    const exists = await conn.onWhatsApp(number)
+                                    if (exists?.jid || (exists && exists[0]?.jid)) {
+                                        const pelapor = await prisma.pelapor.findFirst({
+                                            where: {
+                                                nomorPelapor: data.waTo
+                                            }
+                                        })
+                                        await conn.sendMessage(exists.jid || exists[0].jid, { text: whatsappToUserProcess(pelapor) })
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                dateSended: new Date(),
+                                                waStatus: 1
+                                            }
+                                        })
+                                    } else {
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                waStatus: 3
+                                            }
+                                        })
+                                    }
+                                } catch (error) {
+                                    console.log(error)
+                                    await prisma.whatsapp.update({
+                                        where: {
+                                            waId: data.waId
+                                        },
+                                        data: {
+                                            waStatus: 2
+                                        }
+                                    })
+                                }
+                                break;
+                            case 4:
+                                try {
+                                    const number = phoneNumberFormatter(data.waTo)
+                                    const exists = await conn.onWhatsApp(number)
+                                    if (exists?.jid || (exists && exists[0]?.jid)) {
+                                        const pelapor = await prisma.pelapor.findFirst({
+                                            where: {
+                                                nomorPelapor: data.waTo
+                                            }
+                                        })
+                                        await conn.sendMessage(exists.jid || exists[0].jid, { text: whatsappToUserComplete(pelapor) })
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                dateSended: new Date(),
+                                                waStatus: 1
+                                            }
+                                        })
+                                    } else {
+                                        await prisma.whatsapp.update({
+                                            where: {
+                                                waId: data.waId
+                                            },
+                                            data: {
+                                                waStatus: 3
+                                            }
+                                        })
+                                    }
+                                } catch (error) {
+                                    console.log(error)
+                                    await prisma.whatsapp.update({
+                                        where: {
+                                            waId: data.waId
+                                        },
+                                        data: {
+                                            waStatus: 2
+                                        }
+                                    })
+                                }
+                                break;
+                            case 5:
+                                try {
+                                    const number = phoneNumberFormatter(data.waTo)
+                                    const exists = await conn.onWhatsApp(number)
+                                    if (exists?.jid || (exists && exists[0]?.jid)) {
+                                        const pelapor = await prisma.pelapor.findFirst({
+                                            where: {
+                                                nomorPelapor: data.waTo
+                                            }
+                                        })
+                                        await conn.sendMessage(exists.jid || exists[0].jid, { text: whatsappToUserReject(pelapor) })
                                         await prisma.whatsapp.update({
                                             where: {
                                                 waId: data.waId
@@ -166,7 +333,6 @@ export default function cronJobScheduler(sessionMap, connectToWhatsApp) {
                                 })
                             }
                             break;
-
                         case 1:
                             try {
                                 const admin = await prisma.user.findFirst({
@@ -185,6 +351,118 @@ export default function cronJobScheduler(sessionMap, connectToWhatsApp) {
 
                                 await sendMailTransport(mailLaporanToAdmin(admin, laporan))
 
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 1,
+                                        dateSended: new Date()
+                                    }
+                                })
+                            } catch (error) {
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 2,
+                                    }
+                                })
+                            }
+                            break;
+                        case 2:
+                            try {
+                                const pelapor = await prisma.pelapor.findFirst({
+                                    where: {
+                                        emailPelapor: data.mailTo
+                                    }
+                                })
+                                await sendMailTransport(mailLaporanToUserApprove(pelapor))
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 1,
+                                        dateSended: new Date()
+                                    }
+                                })
+                            } catch (error) {
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 2,
+                                    }
+                                })
+                            }
+                            break;
+                        case 3:
+                            try {
+                                const pelapor = await prisma.pelapor.findFirst({
+                                    where: {
+                                        emailPelapor: data.mailTo
+                                    }
+                                })
+                                await sendMailTransport(mailLaporanToUserProcess(pelapor))
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 1,
+                                        dateSended: new Date()
+                                    }
+                                })
+                            } catch (error) {
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 2,
+                                    }
+                                })
+                            }
+                            break;
+                        case 4:
+                            try {
+                                const pelapor = await prisma.pelapor.findFirst({
+                                    where: {
+                                        emailPelapor: data.mailTo
+                                    }
+                                })
+                                await sendMailTransport(mailLaporanToUserComplete(pelapor))
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 1,
+                                        dateSended: new Date()
+                                    }
+                                })
+                            } catch (error) {
+                                await prisma.mail.update({
+                                    where: {
+                                        mailId: data.mailId
+                                    },
+                                    data: {
+                                        mailStatus: 2,
+                                    }
+                                })
+                            }
+                            break;
+                        case 5:
+                            try {
+                                const pelapor = await prisma.pelapor.findFirst({
+                                    where: {
+                                        emailPelapor: data.mailTo
+                                    }
+                                })
+                                await sendMailTransport(mailLaporanToUserRejected(pelapor))
                                 await prisma.mail.update({
                                     where: {
                                         mailId: data.mailId

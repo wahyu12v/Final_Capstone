@@ -13,7 +13,100 @@ export const mailLaporanToUser = (data) => {
             </div>
             <p style="font-size:1.1em">Kepada Yth. ${data.namaPelapor},</p>
             <p style="text-align: justify">Terima kasih telah melaporkan tumpukan sampah yang Anda temukan. Kami sangat menghargai kepedulian Anda terhadap kebersihan lingkungan kita.</p>
+            <p style="text-align: justify">Terima kasih atas partisipasi dan perhatian Anda dalam menjaga kebersihan dan kenyamanan lingkungan kita.</p <p style="font-size:0.9em;">Salam hormat,<br />Admin PANTAS</p>
+            <hr style="border:none;border-top:1px solid #eee" />
+            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                <p>PANTAS</p>
+                <p>Pelaporan Aduan Tumpukan Sampah</p>
+                <p>Indonesia</p>
+            </div>
+        </div>
+    </div>`
+    }
+}
+export const mailLaporanToUserApprove = (data) => {
+    return {
+        from: `PANTAS Indonesia <${process.env.MAIL_USER}>`,
+        to: data.emailPelapor,
+        subject: "PANTAS: Laporan Diterima",
+        html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+        <div style="margin:50px auto;width:70%;padding:20px 0">
+            <div style="border-bottom:1px solid #eee">
+                <a href="" style="font-size:1.4em;color: #00923F;text-decoration:none;font-weight:600">Terima Kasih atas Laporan Anda</a>
+            </div>
+            <p style="font-size:1.1em">Kepada Yth. ${data.namaPelapor},</p>
             <p style="text-align: justify"> Laporan Anda telah kami terima dan akan segera ditindaklanjuti oleh tim kami. Kami akan melakukan langkah-langkah yang diperlukan untuk memastikan masalah ini ditangani secepat mungkin.</p>
+            <p style="text-align: justify">Terima kasih atas partisipasi dan perhatian Anda dalam menjaga kebersihan dan kenyamanan lingkungan kita.</p <p style="font-size:0.9em;">Salam hormat,<br />Admin PANTAS</p>
+            <hr style="border:none;border-top:1px solid #eee" />
+            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                <p>PANTAS</p>
+                <p>Pelaporan Aduan Tumpukan Sampah</p>
+                <p>Indonesia</p>
+            </div>
+        </div>
+    </div>`
+    }
+}
+
+export const mailLaporanToUserProcess = (data) => {
+    return {
+        from: `PANTAS Indonesia <${process.env.MAIL_USER}>`,
+        to: data.emailPelapor,
+        subject: "PANTAS: Laporan Diproses",
+        html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+        <div style="margin:50px auto;width:70%;padding:20px 0">
+            <div style="border-bottom:1px solid #eee">
+                <a href="" style="font-size:1.4em;color: #00923F;text-decoration:none;font-weight:600">Terima Kasih atas Laporan Anda</a>
+            </div>
+            <p style="font-size:1.1em">Kepada Yth. ${data.namaPelapor},</p>
+            <p style="text-align: justify"> Laporan Anda sedang ditindaklanjuti oleh tim kami. Kami akan melakukan langkah-langkah yang diperlukan untuk memastikan masalah ini.</p>
+            <p style="text-align: justify">Terima kasih atas partisipasi dan perhatian Anda dalam menjaga kebersihan dan kenyamanan lingkungan kita.</p <p style="font-size:0.9em;">Salam hormat,<br />Admin PANTAS</p>
+            <hr style="border:none;border-top:1px solid #eee" />
+            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                <p>PANTAS</p>
+                <p>Pelaporan Aduan Tumpukan Sampah</p>
+                <p>Indonesia</p>
+            </div>
+        </div>
+    </div>`
+    }
+}
+
+export const mailLaporanToUserComplete = (data) => {
+    return {
+        from: `PANTAS Indonesia <${process.env.MAIL_USER}>`,
+        to: data.emailPelapor,
+        subject: "PANTAS: Laporan Selesai",
+        html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+        <div style="margin:50px auto;width:70%;padding:20px 0">
+            <div style="border-bottom:1px solid #eee">
+                <a href="" style="font-size:1.4em;color: #00923F;text-decoration:none;font-weight:600">Terima Kasih atas Laporan Anda</a>
+            </div>
+            <p style="font-size:1.1em">Kepada Yth. ${data.namaPelapor},</p>
+            <p style="text-align: justify"> Laporan Anda telah selesai di tangani oleh tim kami.</p>
+            <p style="text-align: justify">Terima kasih atas partisipasi dan perhatian Anda dalam menjaga kebersihan dan kenyamanan lingkungan kita.</p <p style="font-size:0.9em;">Salam hormat,<br />Admin PANTAS</p>
+            <hr style="border:none;border-top:1px solid #eee" />
+            <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+                <p>PANTAS</p>
+                <p>Pelaporan Aduan Tumpukan Sampah</p>
+                <p>Indonesia</p>
+            </div>
+        </div>
+    </div>`
+    }
+}
+export const mailLaporanToUserRejected = (data) => {
+    return {
+        from: `PANTAS Indonesia <${process.env.MAIL_USER}>`,
+        to: data.emailPelapor,
+        subject: "PANTAS: Laporan DiTolak",
+        html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+        <div style="margin:50px auto;width:70%;padding:20px 0">
+            <div style="border-bottom:1px solid #eee">
+                <a href="" style="font-size:1.4em;color: #00923F;text-decoration:none;font-weight:600">Terima Kasih atas Laporan Anda</a>
+            </div>
+            <p style="font-size:1.1em">Kepada Yth. ${data.namaPelapor},</p>
+            <p style="text-align: justify"> Laporan Anda kami tolak. Silahkan perbaiki dan lengkapi laporan yang dikirimkan</p>
             <p style="text-align: justify">Terima kasih atas partisipasi dan perhatian Anda dalam menjaga kebersihan dan kenyamanan lingkungan kita.</p <p style="font-size:0.9em;">Salam hormat,<br />Admin PANTAS</p>
             <hr style="border:none;border-top:1px solid #eee" />
             <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">

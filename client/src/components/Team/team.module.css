@@ -1,0 +1,70 @@
+:root {
+  --primary-color: #41b06e;
+  --primary-color-light: #b0fce3;
+  --primary-color-dark: red;
+  --text-dark: #1679ab;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --max-width: 1200px;
+}
+
+.section__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 5rem 1rem;
+}
+
+.section__header {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 3rem;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.section__description {
+  color: var(--text-light);
+  line-height: 1.75rem;
+  text-align: center;
+}
+
+.team__card {
+  text-align: center;
+  padding: 1rem;
+  background: #ecf7ed;
+  border-radius: 8px;
+}
+
+.team__card h4 {
+  color: #41b06e;
+  font-size: 1.5em;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.team__image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid #41b06e;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.team__image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.team__card .universitas {
+  margin-bottom: 10px;
+  color: #0603af;
+  font-weight: 300;
+}
+.team__grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}

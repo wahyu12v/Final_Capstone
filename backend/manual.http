@@ -18,11 +18,34 @@ DELETE http://localhost:3000/users/
 Accept: application/json
 Authorization: Bearer TOKEN
 
-
 ### Get Laporan
 GET http://localhost:3000/laporans/
 Accept: application/json
 Content-Type: application/json
+
+### Get Laporan News Require Login
+GET http://localhost:3000/laporans/news?page=1&size=10
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Token
+
+### Get Laporan Data Masuk Require Login
+GET http://localhost:3000/laporans/data-masuk?page=1&size=10
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Token
+
+### Get Laporan Db
+GET http://localhost:3000/laporans/db
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Token
+
+### Detail Laporan By Id
+GET http://localhost:3000/laporans/55
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer Token
 
 ### Add Laporan
 POST http://localhost:3000/laporans/
@@ -34,7 +57,9 @@ Accept: application/json
   "emailPelapor": "putrodwi31@gmail.com",
   "nomorPelapor": "083805200284",
   "deskripsiLaporan": "Banyak sekali sampah",
-  "lokasiLaporan": "102123213.2100021, 1200012.1200321", //Longitude, Latitude
+  "lokasiLaporanLat": "102123213.2100021", // Latitude
+  "lokasiLaporanLng": "1200012.1200321", // Longitude
+  "kategoriSampah": "3", // 3. Parah || 2. Sedang || 1. Biasa
   "image": "file.png"
 }
 
@@ -55,6 +80,10 @@ Authorization: Bearer TOKEN
   "showOnPage": 1
 }
 
-### MAIL TYPE
+### MAIL WA TYPE
 ### 0 = SEND NOTIF TO ADMIN WHEN NEW LAPORAN
 ### 1 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS SENDED
+### 2 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS APPROVED
+### 3 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS PROCESS
+### 4 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS COMPLETED
+### 5 = SEND NOTIF TO PELAPOR WHEN LAPORAN IS REJECTED

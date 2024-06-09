@@ -1,0 +1,227 @@
+:root {
+  --clr-primary: #7380ec;
+  --clr-danger: #ff7782;
+  --clr-success: #41f1b6;
+  --clr-white: #fff;
+  --clr-info-dark: #7d8da1;
+  --clr-info-light: #dce1eb;
+  --clr-dark: #363949;
+  --clr-warning: #ffbb4e;
+  --clr-light: rgba(132, 139, 200, 0.18);
+  --clr-primary-variant: #111e88;
+  --clr-dark-variant: #677483;
+  --clr-color-background: #f6f6f9;
+
+  --card-border-radius: 2rem;
+  --border-radius-1: 0.4rem;
+  --border-radius-2: 0.8rem;
+  --border-radius-3: 1.2rem;
+
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
+  --box-shadow: 0 2rem 3rem var(--clr-light);
+}
+
+.h1_admin {
+  font-weight: 1500;
+  font-size: 2.8rem;
+}
+
+.primary {
+  color: var(--clr-primary);
+}
+
+.success {
+  color: var(--clr-success);
+}
+
+.danger {
+  color: var(--clr-danger);
+}
+
+.warning {
+  color: var(--clr-warnig);
+}
+
+.container {
+  margin-top: 1.4rem;
+  width: auto;
+}
+.container input {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--clr-dark);
+}
+
+.container .date {
+  display: inline-block;
+  background: var(--clr-white);
+  border-radius: var(--border-radius-1);
+  margin-top: 1rem;
+  padding: 0.5rem 1.6rem;
+}
+
+.container .insights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+}
+.container .insights > div {
+  background-color: var(--clr-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  margin-top: 1rem;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+}
+
+.container .insights > div:hover {
+  box-shadow: none;
+}
+.container .insights > div .mbm {
+  background: var(--clr-primary);
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--clr-white);
+  font-size: 2rem;
+}
+
+.container .insights > div.expenses .mbm {
+  background: var(--clr-success);
+}
+.container .insights > div.income .mbm {
+  background: var(--clr-warning);
+}
+.container .insights > div.parah .mbm {
+  background: var(--clr-danger);
+}
+
+.container .insights > div .middle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container .insights > div .middle h1 {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.container h1 {
+  color: var(--clr-dark);
+}
+.container .insights h1 {
+  color: var(--clr-dark);
+}
+.container .insights h3 {
+  color: var(--clr-dark);
+}
+.container .insights p {
+  color: var(--clr-dark);
+}
+.container .insights h3 {
+  color: var(--clr-dark);
+}
+
+.container .insights .progress {
+  position: relative;
+  height: 68px;
+  width: 68px;
+  border-radius: 50px;
+}
+
+.container .insights svg {
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: 0;
+}
+
+.container .insights svg circle {
+  fill: none;
+  stroke: var(--clr-primary);
+  transform: rotate(270, 80, 80);
+  stroke-width: 5;
+}
+.container .insights .sales svg circle {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 150;
+}
+
+.container .insights .expenses svg circle {
+  stroke-dashoffset: 10;
+  stroke-dasharray: 150;
+}
+.container .insights .sales svg circle {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 150;
+}
+.container .insights .income svg circle {
+  stroke: var(--clr-success);
+}
+
+.container .insights .progress .number {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* recent order */
+
+.container .recent_order {
+  margin-top: 2rem;
+}
+
+.table_container {
+  background: var(--clr-white);
+  width: 100%;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  text-align: center;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+  color: var(--clr-dark);
+}
+
+.table_container:hover {
+  box-shadow: none;
+}
+
+.container .recent_order h2 {
+  color: var(--clr-dark);
+}
+
+.container .recent_order h2 {
+  margin-bottom: 0.8rem;
+}
+
+.container .recent_order a {
+  text-align: center;
+  display: block;
+  margin: 1rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .container .insights {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container .insights {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.6rem;
+    padding: 40px;
+  }
+  .container .recent_order {
+    padding: 30px;
+    margin: 0 auto;
+  }
+}

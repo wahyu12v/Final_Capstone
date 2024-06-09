@@ -39,8 +39,14 @@ export default function FormLaporan({ lat, lng }) {
           toast.error('Laporan gagal dikirim');
         }
       },
-      onError: () => {
-        toast.error('Laporan gagal dikirim');
+      onError: (error) => {
+        if (error && error.response && error.response.status === 400) {
+          return toast.error('Laporan gagal dikirim');
+        } else if (error && error.response) {
+          return toast.error('Gagal menghubungkan ke server');
+        } else {
+          return toast.error('Gagal menghubungkan ke server');
+        }
       },
     });
 
@@ -169,7 +175,7 @@ export default function FormLaporan({ lat, lng }) {
         {formLaporanIsPending ? (
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn__landing"
             style={{ pointerEvents: 'none' }}
             disabled
           >
@@ -183,7 +189,7 @@ export default function FormLaporan({ lat, lng }) {
             Mengirim...
           </button>
         ) : (
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn__landing">
             <RiSendPlaneFill /> Kirim laporan
           </button>
         )}

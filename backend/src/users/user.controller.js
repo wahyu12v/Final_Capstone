@@ -21,8 +21,8 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
         const isUsernameExist = await getUserByUsername(userLogin.username);
 
         if (!isUsernameExist) {
-            return res.status(401).json({
-                status: 401,
+            return res.status(400).json({
+                status: 400,
                 message: "Username or Password is invalid"
             });
         }
@@ -30,8 +30,8 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
         const isPasswordCorrect = await bcrypt.compare(userLogin.password, isUsernameExist.password);
 
         if (!isPasswordCorrect) {
-            return res.status(401).json({
-                status: 401,
+            return res.status(400).json({
+                status: 400,
                 message: "Username or Password is invalid"
             });
         }
@@ -51,8 +51,8 @@ user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
             }
         });
     } catch (error) {
-        return res.status(401).json({
-            status: 401,
+        return res.status(500).json({
+            status: 500,
             message: error.message
         });
     }

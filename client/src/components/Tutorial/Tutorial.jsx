@@ -1,16 +1,23 @@
+import styles from './tutorial.module.css';
+
 export default function Tutorial() {
   return (
-    <section className="section__container client__container" id="tutorial">
-      <h2 className="section__header">Apakah Masih mengalami kesulitan ?</h2>
-      <p className="section__description">
+    <section
+      className={`${styles.section__container} ${styles.client__container}`}
+      id="tutorial"
+    >
+      <h2 className={styles.section__header}>
+        Apakah Masih mengalami kesulitan ?
+      </h2>
+      <p className={styles.section__description}>
         kami akan menyediakan video tutorial youtube untuk melihat bagaimana
         cara melaporkan tumpukan sampah.
       </p>
-      <div className="client__swiper">
+      <div className={styles.client__swiper}>
         <div className="swiper">
           <div className="swiper-wrapper">
             <div className="swiper-slide">
-              <div className="client__card">
+              <div className={styles.client__card}>
                 <iframe
                   width={630}
                   height={365}

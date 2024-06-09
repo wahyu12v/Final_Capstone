@@ -1,39 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RiCloseLine, RiMenuLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import styles from './navbar.module.css';
 
 export default function Navbar({ page }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
   return (
-    <nav>
-      <div className="nav__header">
-        <div className="logo nav__logo">
+    <nav className={styles.nav__landing}>
+      <div className={styles.nav__header}>
+        <div className={`${styles.logo} ${styles.nav__logo}`}>
           <Link to={'/'}>PANTAS</Link>
         </div>
         <div
-          className="nav__menu__btn"
+          className={styles.nav__menu__btn}
           id="menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <span>{menuOpen ? <RiCloseLine /> : <RiMenuLine />}</span>
         </div>
       </div>
-      <ul className={'nav__links' + (menuOpen ? ' open' : '')} id="nav-links">
-        {page.map((item) =>
-          item.navigate ? (
-            <li key={item.link}>
-              <Link to={item.link} onClick={() => setMenuOpen(!menuOpen)}>
-                {item.title}
-              </Link>
-            </li>
-          ) : (
-            <li key={item.link}>
-              <a href={item.link} onClick={() => setMenuOpen(!menuOpen)}>
-                {item.title}
-              </a>
-            </li>
-          )
-        )}
+      <ul
+        className={`${styles.nav__links}` + (menuOpen ? ` ${styles.open}` : '')}
+        id="nav-links"
+      >
+        {page.map((item) => (
+          <li key={item.link}>
+            <NavLink to={item.link} onClick={() => setMenuOpen(!menuOpen)}>
+              {item.title}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </nav>
   );

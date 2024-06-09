@@ -1,17 +1,26 @@
 import imgHeader from '/src/assets/header.jpg';
+import styles from './laporan.module.css';
 
 export default function LaporanHero() {
   return (
-    <header className="section__container header__container" id="home">
-      <div className="header__image">
-        <img src={imgHeader} alt="header" data-aos="fade-left" />
+    <header
+      className={`${styles.section__container} ${styles.header__container}`}
+      id="home"
+    >
+      <div className={styles.header__image}>
+        <img
+          className="img__landing"
+          src={imgHeader}
+          alt="header"
+          data-aos="fade-left"
+        />
       </div>
-      <div className="header__content">
+      <div className={styles.header__content}>
         <h1 data-aos="fade-up" data-aos-delay="500">
           Halaman Laporkan Sampah di Sistem <span>PANTAS</span>
         </h1>
         <p
-          className="section__description"
+          className={styles.section__description}
           data-aos="fade-up"
           data-aos-delay="1000"
         >
