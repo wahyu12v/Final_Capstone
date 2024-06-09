@@ -21,7 +21,7 @@ export default function Tutorial() {
                 <iframe
                   width={630}
                   height={365}
-                  src="https://www.youtube.com/embed/onKt1i3jrXw"
+                  src="https://www.youtube.com/embed/TUXcukwUxqw"
                   allowFullScreen=""
                   style={{ border: 'none' }}
                 />

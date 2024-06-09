@@ -71,7 +71,11 @@ export default function Cara() {
           </p>
         </div>
       </div>
-      <div className={styles.containerbutton}>
+      <div
+        className={styles.containerbutton}
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
         <button className={styles['button-33']} role="button">
           <Link to="/lapor#form" reloadDocument replace>
             <IoPaperPlaneOutline size={26} /> Ayo Laporkan Sekarang{' '}
