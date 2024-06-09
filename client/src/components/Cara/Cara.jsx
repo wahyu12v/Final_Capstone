@@ -1,7 +1,7 @@
 import { RiEarthFill, RiMapPinFill, RiFileListFill } from 'react-icons/ri';
 import styles from './cara.module.css';
 import { Link } from 'react-router-dom';
-import { IoPaperPlane, IoPaperPlaneOutline } from 'react-icons/io5';
+import { IoPaperPlaneOutline } from 'react-icons/io5';
 
 export default function Cara() {
   return (
@@ -71,9 +71,9 @@ export default function Cara() {
           </p>
         </div>
       </div>
-      <div class={styles.containerbutton}>
-        <button class={styles['button-33']} role="button">
-          <Link to="/lapor#form">
+      <div className={styles.containerbutton}>
+        <button className={styles['button-33']} role="button">
+          <Link to="/lapor#form" reloadDocument replace>
             <IoPaperPlaneOutline size={26} /> Ayo Laporkan Sekarang{' '}
           </Link>
         </button>

@@ -6,9 +6,7 @@ import { Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import {
   IoCheckmarkCircleOutline,
   IoCheckmarkDoneSharp,
-  IoCheckmarkSharp,
   IoCloseCircleOutline,
-  IoCloseSharp,
   IoEyeOutline,
   IoPaperPlane,
 } from 'react-icons/io5';
@@ -350,6 +348,7 @@ export default function TableLaporanMasuk() {
                 style={{ cursor: 'pointer' }}
                 {...triggerHandler}
                 ref={ref}
+                reloadDocument
               >
                 <IoEyeOutline size={28} />
               </Link>

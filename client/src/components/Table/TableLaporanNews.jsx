@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axiosUtil from '../../utils/axios.utils';
 import TableSkeletonCustom from '../Skeleton/TableSkeleton';
-import formatDateData from '../../utils/time.utils';
 import { Badge } from 'react-bootstrap';
+import Moment from 'react-moment';
+import 'moment/locale/id';
 
 const columns = [
   {
@@ -12,7 +13,11 @@ const columns = [
   },
   {
     name: 'Waktu dibuat',
-    selector: (row) => formatDateData(row.dateCreated),
+    selector: (row) => (
+      <Moment locale="id" fromNow>
+        {row.dateCreated}
+      </Moment>
+    ),
   },
   {
     name: 'Kategori',

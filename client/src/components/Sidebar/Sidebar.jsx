@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import imgProfile from '../../assets/profile.jpg';
+import imgProfile from '../../assets/default.jpg';
 import styles from './sidebar.module.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { actionGetUser } from '../../actions/masuk.action';
