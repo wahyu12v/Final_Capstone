@@ -37,16 +37,25 @@ export default function DetailLaporanContent() {
         </h2>
         <div className={styles.table_container}>
           {isPendingLaporan && <Skeleton height={300} width={300} />}
-          {dataLaporan && dataLaporan.data && (
-            <Image
-              src={`${import.meta.env.VITE_BASE_URL}${
-                dataLaporan.data.gambarLaporan
-              }`}
-              alt="Laporan"
-              fluid
-              thumbnail
-            />
-          )}
+          <div
+            style={{
+              height: '35rem',
+              width: 'auto',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            {dataLaporan && dataLaporan.data && (
+              <Image
+                src={`${import.meta.env.VITE_BASE_URL}${
+                  dataLaporan.data.gambarLaporan
+                }`}
+                alt="Laporan"
+                fluid
+                thumbnail
+              />
+            )}
+          </div>
 
           <Form style={{ textAlign: 'left' }}>
             <Form.Group
