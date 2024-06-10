@@ -5,7 +5,7 @@ import Error from '../../components/Error/Error';
 export default function Notfound() {
   const page = [
     {
-      title: 'Home',
+      title: 'Beranda',
       link: '/',
       navigate: true,
     },
@@ -20,7 +20,7 @@ export default function Notfound() {
     <>
       <Navbar page={page} />
       <Error status={404} />
-      <Footer />
+      <Footer page={2} />
     </>
   );
 }

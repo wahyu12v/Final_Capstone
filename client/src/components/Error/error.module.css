@@ -1,6 +1,4 @@
-/* ERROR PAGE */
 .body_error {
-  height: 100vh;
   padding-top: 50px;
   display: flex;
   align-items: center;

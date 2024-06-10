@@ -7,11 +7,11 @@ export default function Team() {
   return (
     <section
       className={styles.section__container}
-      id="team"
+      id="tim"
       style={{ marginTop: '-50px' }}
     >
       <h2 className={styles.section__header} style={{ marginBottom: 30 }}>
-        Our Team
+        Tim Kami
       </h2>
       <div className={styles.team__grid}>
         <div

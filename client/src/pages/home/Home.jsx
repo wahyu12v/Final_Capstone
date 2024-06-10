@@ -10,16 +10,16 @@ import Team from '../../components/Team/Team';
 const Home = () => {
   const page = [
     {
-      title: 'Home',
-      link: '/#home',
+      title: 'Beranda',
+      link: '/#beranda',
     },
     {
       title: 'Definisi',
       link: '/#definisi',
     },
     {
-      title: 'Team Kami',
-      link: '/#team',
+      title: 'Tim Kami',
+      link: '/#tim',
     },
     {
       title: 'Laporan',
@@ -37,7 +37,7 @@ const Home = () => {
       <Cara />
       <Keunggulan />
       <Team />
-      <Footer />
+      <Footer page={1} />
     </>
   );
 };

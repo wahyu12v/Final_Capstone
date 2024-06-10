@@ -82,7 +82,7 @@ const Laporan = () => {
 
   const page = [
     {
-      title: 'Home',
+      title: 'Beranda',
       link: '/',
       navigate: true,
     },
@@ -205,7 +205,7 @@ const Laporan = () => {
           </div>
         </div>
       </LaporanSection>
-      <Footer />
+      <Footer page={2} />
     </>
   );
 };

@@ -5,7 +5,7 @@ import Error from '../../components/Error/Error';
 export default function Forbidden() {
   const page = [
     {
-      title: 'Home',
+      title: 'Beranda',
       link: '/',
       navigate: true,
     },
@@ -20,7 +20,7 @@ export default function Forbidden() {
     <>
       <Navbar page={page} />
       <Error status={403} />
-      <Footer />
+      <Footer page={2} />
     </>
   );
 }

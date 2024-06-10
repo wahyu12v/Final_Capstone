@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <header
       className={`${styles.section__container} ${styles.header__container}`}
-      id="home"
+      id="beranda"
     >
       <div className={styles.header__image}>
         <img
