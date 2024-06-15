@@ -104,107 +104,112 @@ const Laporan = () => {
     <>
       <Navbar page={page} />
       <LaporanHero />
-      <Cara />
-      <Tutorial />
-      <LaporanSection>
-        <div className="row" data-aos="fade-up" data-aos-delay="500">
-          <div className="col-lg mb-3">
-            <Card>
-              <MapContainer
-                center={[-6.2, 106.816666]}
-                zoom={16}
-                scrollWheelZoom={true}
-                style={{ height: '40vh', zIndex: 0 }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <LocationMaker />
-                {dataLaporan &&
-                  dataLaporan.data &&
-                  dataLaporan.data.length > 0 &&
-                  dataLaporan.data.map((item) => (
+      <main id="konten">
+        <Cara />
+        <Tutorial />
+        <LaporanSection>
+          <div className="row" data-aos="fade-up" data-aos-delay="500">
+            <div className="col-lg mb-3">
+              <Card>
+                <MapContainer
+                  center={[-6.2, 106.816666]}
+                  zoom={16}
+                  scrollWheelZoom={true}
+                  style={{ height: '40vh', zIndex: 0 }}
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <LocationMaker />
+                  {dataLaporan &&
+                    dataLaporan.data &&
+                    dataLaporan.data.length > 0 &&
+                    dataLaporan.data.map((item) => (
+                      <Marker
+                        position={[
+                          item.lokasiLaporanLat,
+                          item.lokasiLaporanLng,
+                        ]}
+                        icon={iconTemp}
+                        key={item.laporanId}
+                      >
+                        <Popup>
+                          <b>Kategori tumpukan:</b>{' '}
+                          {item.kategoriSampah === 3
+                            ? 'Parah'
+                            : item.kategoriSampah === 2
+                            ? 'Sedang'
+                            : 'Kecil'}
+                          <br />
+                          <b>Dilaporkan pada:</b>{' '}
+                          <Moment locale="id" format="dddd, DD MMMM YYYY hh:mm">
+                            {item.dateCreated}
+                          </Moment>
+                        </Popup>
+                        <Circle
+                          center={{
+                            lat: item.lokasiLaporanLat,
+                            lng: item.lokasiLaporanLng,
+                          }}
+                          pathOptions={{
+                            color: 'none',
+                            fillColor:
+                              item.kategoriSampah === 3
+                                ? 'red'
+                                : item.kategoriSampah === 2
+                                ? 'orange'
+                                : 'green',
+                          }}
+                          radius={
+                            item.kategoriSampah === 3
+                              ? 200
+                              : item.kategoriSampah === 2
+                              ? 150
+                              : 100
+                          }
+                        />
+                      </Marker>
+                    ))}
+                  {location && location.loaded && !location.error && (
                     <Marker
-                      position={[item.lokasiLaporanLat, item.lokasiLaporanLng]}
-                      icon={iconTemp}
-                      key={item.laporanId}
+                      position={[
+                        location.coordinates.lat,
+                        location.coordinates.lng,
+                      ]}
+                      icon={icon}
                     >
-                      <Popup>
-                        <b>Kategori tumpukan:</b>{' '}
-                        {item.kategoriSampah === 3
-                          ? 'Parah'
-                          : item.kategoriSampah === 2
-                          ? 'Sedang'
-                          : 'Kecil'}
-                        <br />
-                        <b>Dilaporkan pada:</b>{' '}
-                        <Moment locale="id" format="dddd, DD MMMM YYYY hh:mm">
-                          {item.dateCreated}
-                        </Moment>
-                      </Popup>
+                      <Popup>Posisi anda saat ini</Popup>
                       <Circle
                         center={{
-                          lat: item.lokasiLaporanLat,
-                          lng: item.lokasiLaporanLng,
+                          lat: location.coordinates.lat,
+                          lng: location.coordinates.lng,
                         }}
-                        pathOptions={{
-                          color: 'none',
-                          fillColor:
-                            item.kategoriSampah === 3
-                              ? 'red'
-                              : item.kategoriSampah === 2
-                              ? 'orange'
-                              : 'green',
-                        }}
-                        radius={
-                          item.kategoriSampah === 3
-                            ? 200
-                            : item.kategoriSampah === 2
-                            ? 150
-                            : 100
-                        }
+                        pathOptions={{ color: 'none', fillColor: 'cyan' }}
+                        radius={200}
                       />
                     </Marker>
-                  ))}
-                {location && location.loaded && !location.error && (
-                  <Marker
-                    position={[
-                      location.coordinates.lat,
-                      location.coordinates.lng,
-                    ]}
-                    icon={icon}
-                  >
-                    <Popup>Posisi anda saat ini</Popup>
-                    <Circle
-                      center={{
-                        lat: location.coordinates.lat,
-                        lng: location.coordinates.lng,
-                      }}
-                      pathOptions={{ color: 'none', fillColor: 'cyan' }}
-                      radius={200}
+                  )}
+                </MapContainer>
+              </Card>
+            </div>
+            <div className="col-lg-6">
+              <Card>
+                <Card.Body>
+                  {location && location.loaded && !location.error ? (
+                    <FormLaporan
+                      lat={location.coordinates.lat}
+                      lng={location.coordinates.lng}
                     />
-                  </Marker>
-                )}
-              </MapContainer>
-            </Card>
+                  ) : (
+                    <FormLaporan lat={0} lng={0} />
+                  )}
+                </Card.Body>
+              </Card>
+            </div>
           </div>
-          <div className="col-lg-6">
-            <Card>
-              <Card.Body>
-                {location && location.loaded && !location.error ? (
-                  <FormLaporan
-                    lat={location.coordinates.lat}
-                    lng={location.coordinates.lng}
-                  />
-                ) : (
-                  <FormLaporan lat={0} lng={0} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
-      </LaporanSection>
+        </LaporanSection>
+      </main>
       <Footer page={2} />
     </>
   );

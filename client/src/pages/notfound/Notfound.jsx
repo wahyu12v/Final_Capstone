@@ -19,7 +19,9 @@ export default function Notfound() {
   return (
     <>
       <Navbar page={page} />
-      <Error status={404} />
+      <main id="konten">
+        <Error status={404} />
+      </main>
       <Footer page={2} />
     </>
   );

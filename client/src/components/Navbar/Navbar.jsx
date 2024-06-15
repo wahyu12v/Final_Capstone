@@ -16,31 +16,38 @@ export default function Navbar({ page }) {
     }
   }, [location]);
   return (
-    <nav className={styles.nav__landing}>
-      <div className={styles.nav__header}>
-        <div className={`${styles.logo} ${styles.nav__logo}`}>
-          <Link to={'/'}>PANTAS</Link>
+    <>
+      <Link to="#konten" className={styles['skip-link']}>
+        Skip To Content
+      </Link>
+      <nav className={styles.nav__landing}>
+        <div className={styles.nav__header}>
+          <div className={`${styles.logo} ${styles.nav__logo}`}>
+            <Link to={'/'}>PANTAS</Link>
+          </div>
+          <div
+            className={styles.nav__menu__btn}
+            id="menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span>{menuOpen ? <RiCloseLine /> : <RiMenuLine />}</span>
+          </div>
         </div>
-        <div
-          className={styles.nav__menu__btn}
-          id="menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
+        <ul
+          className={
+            `${styles.nav__links}` + (menuOpen ? ` ${styles.open}` : '')
+          }
+          id="nav-links"
         >
-          <span>{menuOpen ? <RiCloseLine /> : <RiMenuLine />}</span>
-        </div>
-      </div>
-      <ul
-        className={`${styles.nav__links}` + (menuOpen ? ` ${styles.open}` : '')}
-        id="nav-links"
-      >
-        {page.map((item) => (
-          <li key={item.link}>
-            <NavLink to={item.link} onClick={() => setMenuOpen(!menuOpen)}>
-              {item.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+          {page.map((item) => (
+            <li key={item.link}>
+              <NavLink to={item.link} onClick={() => setMenuOpen(!menuOpen)}>
+                {item.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 }

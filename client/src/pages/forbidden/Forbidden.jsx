@@ -19,7 +19,9 @@ export default function Forbidden() {
   return (
     <>
       <Navbar page={page} />
-      <Error status={403} />
+      <main id="konten">
+        <Error status={403} />
+      </main>
       <Footer page={2} />
     </>
   );

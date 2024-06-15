@@ -32,11 +32,13 @@ const Home = () => {
     <>
       <Navbar page={page} />
       <Hero />
-      <Definisi />
-      <Slider />
-      <Cara />
-      <Keunggulan />
-      <Team />
+      <main id="konten">
+        <Definisi />
+        <Slider />
+        <Cara />
+        <Keunggulan />
+        <Team />
+      </main>
       <Footer page={1} />
     </>
   );
