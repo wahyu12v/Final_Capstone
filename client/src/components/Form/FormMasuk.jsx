@@ -28,12 +28,12 @@ export default function FormMasuk() {
             setTimeout(() => navigate('/dashboard'), 1000);
           }
         } else {
-          toast.error('Username atau Password Salah');
+          toast.error('Nama pengguna atau Kata sandi Salah');
         }
       },
       onError: (error) => {
         if (error && error.response && error.response.status === 400) {
-          return toast.error('Username atau Password Salah');
+          return toast.error('Nama pengguna atau Kata sandi Salah');
         } else if (error && error.response) {
           return toast.error('Gagal menghubungkan ke server');
         } else {
@@ -55,7 +55,7 @@ export default function FormMasuk() {
           onChange={handleFormInput}
           value={formik.values.username}
           isInvalid={formik.touched.username && formik.errors.username}
-          placeholder="Username"
+          placeholder="Nama Pengguna"
           required
         />
         <Form.Control.Feedback type="invalid">
@@ -70,7 +70,7 @@ export default function FormMasuk() {
           onChange={handleFormInput}
           value={formik.values.password}
           isInvalid={formik.touched.password && formik.errors.password}
-          placeholder="Password"
+          placeholder="Kata Sandi"
         />
         <Form.Control.Feedback type="invalid">
           {formik.errors.password}
@@ -80,7 +80,7 @@ export default function FormMasuk() {
         {formMasukIsPending ? (
           <button
             type="submit"
-            className="btn btn-lg btn-primary w-100 fs-6"
+            className="btn btn-lg btn-success w-100 fs-6"
             disabled
           >
             <Spinner
@@ -93,8 +93,8 @@ export default function FormMasuk() {
             Menunggu...
           </button>
         ) : (
-          <button type="submit" className="btn btn-lg btn-primary w-100 fs-6">
-            Login
+          <button type="submit" className="btn btn-lg btn-success w-100 fs-6">
+            Masuk
           </button>
         )}
       </div>
