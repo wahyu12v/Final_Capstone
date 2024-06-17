@@ -19,7 +19,7 @@ PANTAS merupakan sebuah platform pelaporan sampah yang memudahkan masyarakat dal
   [![ReactQeury][ReactQuery]][ReactQuery-url]
   [![Formik][Formik]][React-url]
   [![ReactBootstrap][ReactBootstrap]][ReactBootstrap-url]
-  [![Leaflet][Leaflet]][ReactBootstrap-url]
+  [![Leaflet][Leaflet]][Leaflet-url]
 
 - Backend :
 
@@ -134,7 +134,13 @@ PANTAS merupakan sebuah platform pelaporan sampah yang memudahkan masyarakat dal
 
    pastikan kalian berada pada root folder /Final_Capstone
 
-10. Untuk mulai mengaksesnya kamu dapat mengunjungi [http:/localhost:5371](http:/localhost:5371)
+10. Untuk mulai mengaksesnya halaman beranda aplikasi kamu perlu mengunjungi [http://localhost:5371](http://localhost:5371)
+11. Untuk mengakses dashboard kamu perlu masuk terlebih dahulu melalui [http:/localhost:5371/masuk](http://localhost:5371/masuk)
+    Nama Pengguna : `admin_pantas`
+
+    Kata Sandi : `admin123`
+
+12. Akses Dashboard pada [http:/localhost:5371/dashboard](http://localhost:5371/dashboard)
 
 [NodeMailer]: https://img.shields.io/badge/nodemailer-6D4AFF?style=for-the-badge&logo=protonmail&logoColor=FFFFFF
 [NodeMailer-url]: https://nodemailer.com/
@@ -162,6 +168,7 @@ PANTAS merupakan sebuah platform pelaporan sampah yang memudahkan masyarakat dal
 [ReactBootstrap-url]: https://react-bootstrap.netlify.app/
 [ReactBootstrap]: https://img.shields.io/badge/reactbootstrap-0F172A?&style=for-the-badge&logo=reactbootstrap&logoColor=61DAFB
 [Leaflet]: https://img.shields.io/badge/leaflet.js-FFFFFF?&style=for-the-badge&logo=leaflet&logoColor=199900
+[Leaflet-url]: https://react-leaflet.js.org/docs/start-introduction/
 [PostgreSQL-url]: https://www.postgresql.org/
 [PostgreSQL]: https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=FFFFFF
 [NodeJS-url]: https://nodejs.org/en
