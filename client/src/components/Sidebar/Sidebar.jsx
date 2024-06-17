@@ -126,6 +126,13 @@ export default function Sidebar({ children }) {
             <span className="material-symbols-sharp">receipt_long </span>
             <h3>Laporan</h3>
           </NavLink>
+          <NavLink
+            to="/dashboard/pengaturan"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+          >
+            <span className="material-symbols-sharp">settings </span>
+            <h3>Pengaturan</h3>
+          </NavLink>
           <a href="#" onClick={KonfirmasiKeluar}>
             <span
               className="material-symbols-sharp"

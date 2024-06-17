@@ -48,12 +48,6 @@
   width: 122%;
   z-index: 9;
 }
-.container input {
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-  color: var(--clr-dark);
-}
 
 .container .date {
   display: inline-block;

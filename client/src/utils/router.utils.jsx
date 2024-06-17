@@ -18,6 +18,7 @@ import 'aos/dist/aos.css';
 import 'leaflet/dist/leaflet.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import DetailLaporan from '../pages/dashboard/laporan/DetailLaporan';
+import Pengaturan from '../pages/dashboard/pengaturan/Pengaturan';
 import { Helmet } from 'react-helmet-async';
 
 const queryClient = new QueryClient();
@@ -75,6 +76,20 @@ export const router = createBrowserRouter([
           <meta property="twitter:image" content={imgMeta}/>
         </Helmet>
         <DetailLaporan />
+      </QueryClientProvider>
+    ),
+  },
+  {
+    path: '/dashboard/pengaturan',
+    element: (
+      <QueryClientProvider client={queryClient}>
+        <Toaster richColors position="top-center" duration={4000} />
+        <Helmet>
+          <title>Pengaturan | PANTAS - Pelaporan Aduan Tumpukan Sampah</title>
+          <meta property="og:image" content={imgMeta}/>
+          <meta property="twitter:image" content={imgMeta}/>
+        </Helmet>
+        <Pengaturan />
       </QueryClientProvider>
     ),
   },
