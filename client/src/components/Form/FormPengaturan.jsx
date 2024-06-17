@@ -83,6 +83,10 @@ export default function FormPengaturan() {
               }
               required
             />
+            <small class="text-dark">
+              Minimal 8 karakter dan mengandung kombinasi huruf kecil, huruf
+              besar, angka dan simbol
+            </small>
             <Form.Control.Feedback type="invalid">
               {formik.errors.passwordBaru}
             </Form.Control.Feedback>
