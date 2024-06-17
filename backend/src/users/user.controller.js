@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { v4 as uuid } from "uuid"
 import { requireLogin, validateData } from "../middleware/middleware.js";
-import { userLoginSchema } from "./user.validation.js";
+import { pengaturanSchema, userLoginSchema } from "./user.validation.js";
 const user_router = express.Router();
 
 user_router.post("/login", validateData(userLoginSchema), async (req, res) => {
@@ -107,6 +107,52 @@ user_router.delete("/", requireLogin, async (req, res) => {
         return res.status(200).json({
             status: 200,
             message: "Logout success",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: 500,
+            message: error.message
+        });
+    }
+});
+
+user_router.patch("/", requireLogin, validateData(pengaturanSchema), async (req, res) => {
+    try {
+        const { username, passwordBaru, passwordLama, accessToken } = req.body;
+
+        const isUsernameExist = await getUserByUsername(username);
+        if (!isUsernameExist) {
+            return res.status(400).json({
+                status: 400,
+                message: "Username not found"
+            });
+        }
+        const isPasswordCorrect = await bcrypt.compare(passwordLama, isUsernameExist.password);
+        if (!isPasswordCorrect) {
+            if (accessToken) {
+                return res.status(401).json({
+                    status: 401,
+                    message: "Kata sandi lama tidak sesuai",
+                    token: accessToken,
+                });
+            }
+            return res.status(401).json({
+                status: 401,
+                message: "Kata sandi lama tidak sesuai"
+            });
+        }
+        const hashedPassword = await bcrypt.hashSync(passwordBaru, 10);
+        await editUserByUsername(username, { password: hashedPassword });
+        if (accessToken) {
+            return res.status(200).json({
+                status: 200,
+                message: "Kata sandi berhasil diubah",
+                token: accessToken,
+            });
+        }
+        return res.status(200).json({
+            status: 200,
+            message: "Kata sandi berhasil diubah",
         });
     } catch (error) {
         return res.status(500).json({
