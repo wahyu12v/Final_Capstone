@@ -2,7 +2,7 @@
 
 <h1 align="center"><b>PANTAS - Pelaporan Aduan Tumpukan Sampah</b></h1>
 
-PANTAS merupakan sebuah platform pelaporan sampah yang memudahkan masyarakat dalam melaporkan tumpukan sampah liar. Pengguna dapat mengaksesnya melalui platform ini tanpa registrasi, hanya perlu mengaktifkan GPS untuk menentukan lokasi, dan mengunggah foto tumpukan sampah yang akan dilaporkan. Dengan adanya PANTAS, diharapkan masyarakat dapat lebih aktif menjaga kebersihan lingkungan dan lebih peduli terhadap lingkungan.
+PANTAS merupakan sebuah sistem atau platform pelaporan sampah yang memudahkan masyarakat dalam melaporkan tumpukan sampah liar. Pengguna dapat mengaksesnya melalui platform ini tanpa registrasi, hanya perlu mengaktifkan GPS untuk menentukan lokasi, dan mengunggah foto tumpukan sampah yang akan dilaporkan. Dengan adanya PANTAS, diharapkan masyarakat dapat lebih aktif menjaga kebersihan lingkungan dan lebih peduli terhadap lingkungan.
 
 ## ⭐ Tim C624-PS102
 
