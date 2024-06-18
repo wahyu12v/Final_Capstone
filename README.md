@@ -10,6 +10,15 @@ PANTAS merupakan sebuah platform pelaporan sampah yang memudahkan masyarakat dal
 - F1926YB290 – [Putro Dwi Mulyo](https://github.com/putrodwi31) - Universitas Bina Insani
 - F7146YB143 – [Hasban Dio Saputra](https://github.com/hasbands) - Universitas Islam Kuantan Singingi
 
+## 🚀 Fitur Utama PANTAS
+
+Merupakan pengimplementasian _Leaflet API_ dimana sistem dapat mengambil lokasi pelapor atau pengguna saat ini ketika akan membuat sebuah laporan baru, dengan mengizinkan akses lokasi terhadap sistem ini, adapun beberapa fitur utama yang ada pada sistem ini diantaranya:
+
+- **📍 Location Report History**:
+  Memungkinkan website melihat riwayat dimana saja lokasi/titik yang sudah pernah dilaporkan oleh pelapor lain(dapat dilihat pada peta lokasi pada formulir laporan).
+- **📨 Mail Scheduler** : Memungkinkan website mengirimkan notifikasi melalui email secara Real-Time kepada pelapor dan admin terkait laporan yang masuk ataupun sedang diproses admin.
+- **📱 WhatsApp Scheduler** : Memungkinkan website mengirimkan notifikasi melalui whatsapp secara Real-Time kepada pelapor dan admin terkait laporan yang masuk ataupun sedang diproses admin.
+
 ## ⚙️ Teknologi Pengembangan
 
 - Frontend :
